@@ -8,7 +8,8 @@ using UnityEngine.Serialization;
 public class Player3D : MonoBehaviour
 {
     public float speed = 8f;
-    
+    private float x;
+    private float y;
     public static int lives = 10;
     public static int miss = 0;
 
@@ -27,12 +28,19 @@ public class Player3D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Cursor.visible)
+        {
+            Cursor.visible = false;
+        }
+        x += Input.GetAxis("Mouse X");
+        y += Input.GetAxis("Mouse Y");
+        transform.localEulerAngles = new Vector3(-y,0, -x);
         var mousePos = Input.mousePosition;
         mousePos.z = 10;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
