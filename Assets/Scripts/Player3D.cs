@@ -34,30 +34,29 @@ public class Player3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //鼠标消失
         if (Cursor.visible)
         {
             Cursor.visible = false;
         }
+        //三维旋转
         x += Input.GetAxis("Mouse X");
         y += Input.GetAxis("Mouse Y");
         transform.localEulerAngles = new Vector3(-y,0, -x);
-        var mousePos = Input.mousePosition;
-        mousePos.z = 10;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        var direction = (mousePos-transform.position).normalized;
-        Debug.Log(mousePos);
-        var rotation = Quaternion.LookRotation(direction);
-        ScoreUI.text = ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n"+ "Missing: "+miss+"\n";;
-        //transform.Translate(Vector3.right * 0.01f);这个句子会添加一个一直往右的速度
+        //显示UI
+        ScoreUI.text = ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n"+ "Missing: "+miss+"\n";
+        
         if (playerState != State.Explosion)
         {
+            //移动
             float amtToMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
             transform.Translate(Vector3.right*amtToMove);
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
             transform.Translate(Vector3.up * vertical);
+            //子弹
             if (Input.GetMouseButtonDown(0))
             {
-                Instantiate(Bullet, transform.position, rotation);
+                Instantiate(Bullet, transform.position, Quaternion.LookRotation(transform.up));
             }
         }
         if (transform.position.x < -10f)
