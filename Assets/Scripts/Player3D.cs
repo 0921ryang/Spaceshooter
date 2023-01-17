@@ -12,7 +12,12 @@ public class Player3D : MonoBehaviour
     private float y;
     public static int lives = 10;
     public static int miss = 0;
-
+    private Vector3 screen;
+    public static float smoothTime = 10;
+    private static float w=Screen.width/2.0f;
+    private static float h=Screen.height/2.0f;
+    public static bool B=false;
+    public Quaternion quaternion;
     public GameObject Bullet;
     public GameObject explosionPrefab;
     public static int score=0;
@@ -29,20 +34,25 @@ public class Player3D : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        screen = new Vector3(w, h, 0.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //防止屏幕中途变换
+        w=Screen.width/2.0f; 
+        h=Screen.height/2.0f;
+        screen = new Vector3(w, h, 0.0f);
         //鼠标消失
         if (Cursor.visible)
         {
             Cursor.visible = false;
         }
         //三维旋转
-        x += Input.GetAxis("Mouse X");
-        y += Input.GetAxis("Mouse Y");
-        transform.localEulerAngles = new Vector3(-y,0, -x);
+        x = Input.GetAxis("Mouse X");
+        y = Input.GetAxis("Mouse Y");
+        transform.Rotate(new Vector3(-y,0,-x),Space.Self);
         //显示UI
         ScoreUI.text = ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n"+ "Missing: "+miss+"\n";
         
@@ -53,10 +63,26 @@ public class Player3D : MonoBehaviour
             transform.Translate(Vector3.right*amtToMove);
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
             transform.Translate(Vector3.up * vertical);
-            //子弹
             if (Input.GetMouseButtonDown(0))
             {
-                Instantiate(Bullet, transform.position, Quaternion.LookRotation(transform.up));
+                //子弹跟随准星方向发出
+                Ray ray = Camera.main.ScreenPointToRay(screen);
+                RaycastHit hit;
+                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    //这里是物体被击中后的代码
+                    //hit.point是目标物体的位置
+                    B = true;
+                    var direction = hit.point - transform.position;
+                    var targetRotation = Quaternion.LookRotation(direction);
+                    Debug.Log("扫描到对象");
+                    Instantiate(Bullet, transform.position, targetRotation);
+                }
+                else
+                {
+                    Instantiate(Bullet, transform.position, Quaternion.LookRotation(transform.up));
+                }
             }
         }
         if (transform.position.x < -10f)
