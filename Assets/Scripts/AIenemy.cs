@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AIenemy : MonoBehaviour
 {
@@ -11,10 +15,10 @@ public class AIenemy : MonoBehaviour
     [SerializeField] private int minXPosition, maxXPosition,YPosition;
     [SerializeField] private Art art;
     public GameObject Bullet;
-    public int aiLives;
+    public int aiLives = 5;
     public enum Art
     {
-        Chase, Moving      
+        Chase, Moving,   
     }
     // Start is called before the first frame update
     void Start()
@@ -36,7 +40,8 @@ public class AIenemy : MonoBehaviour
         { 
             case Art.Chase:
             {
-                transform.Translate(moveSpeed*new Vector3(playerPosition.position.x-transform.position.x,0,0)*Time.deltaTime);
+                transform.Translate(moveSpeed*new Vector3(playerPosition.position.x-transform.position.x,0,
+                    playerPosition.position.z-transform.position.z)*Time.deltaTime);
                 //上面就是追踪玩家，只对x轴的位置
                 if (Time.time>nextFire)
                 {
@@ -64,16 +69,20 @@ public class AIenemy : MonoBehaviour
                 //这里就是一个不会追踪，但是会在固定范围内来回移动并且定时射击
                 return;
             }
+            
         }
     }
+    
     public GameObject Effect;//爆炸效果
+
     private void OnTriggerEnter(Collider other)
     {
-        if (CompareTag("Player"))//这里是我给玩家子弹加了Tag来判断
+        if (other.CompareTag("PlayersBullet"))
         {
-            aiLives -= 1;
+            aiLives-=1;
+            Instantiate(Effect, transform.position, transform.rotation);
         }
-        if (aiLives < 0)
+        if (aiLives <= 0)
         {
             Destroy(gameObject);
         }

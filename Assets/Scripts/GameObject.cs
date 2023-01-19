@@ -15,7 +15,7 @@ public class GameObject : MonoBehaviour
     {
         float amtToMove = speed * Time.deltaTime;
         transform.Translate(Vector3.forward*amtToMove,Space.Self);
-        if (transform.position.y > 6f)
+        if (transform.position.y > 8f)
         {
             Destroy(gameObject);
         }
