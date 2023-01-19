@@ -17,7 +17,7 @@ public class EnemyBullet : MonoBehaviour
         float amtToMove = speed * Time.deltaTime;
         transform.Translate(Vector3.down*amtToMove,Space.Self);
 
-        if (transform.position.y < -5f)
+        if (transform.position.y < -8f)
         {
             Destroy(gameObject);
         }
