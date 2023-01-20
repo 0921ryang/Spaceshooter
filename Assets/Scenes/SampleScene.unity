@@ -6257,7 +6257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2576197501682687307, guid: 132bcc8caf6b7224f9a33c4763ea63e2, type: 3}
       propertyPath: m_Name
-      value: "\u8349\u7387\u7684\u6D6E\u6E38\u70AE"
+      value: MovingEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 4563056306522802032, guid: 132bcc8caf6b7224f9a33c4763ea63e2, type: 3}
       propertyPath: m_RootOrder

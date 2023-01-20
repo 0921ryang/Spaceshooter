@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4972410692495838393}
   - component: {fileID: 1846669229081074904}
   m_Layer: 0
-  m_Name: "\u8349\u7387\u7684\u6D6E\u6E38\u70AE"
+  m_Name: MovingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
