@@ -69,16 +69,11 @@ public class Enemy : MonoBehaviour {
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         float scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;
-        //Instantiate(Effect, transform.position, Quaternion.identity);
-        /*if (other.CompareTag("Player"))
-        {
-            Instantiate(Effect, transform.position, Quaternion.identity);
-        }
-        */
+        Instantiate(Effect, transform.position, Quaternion.identity);
         SetSpeedAndPosition();
-            Player.score += 10;
-            Debug.Log("You have score"+Player.score);
-            Debug.Log(other.name);
+        Player.score += 10;
+        Debug.Log("You have score"+Player.score);
+        Debug.Log(other.name);
     }
 }
 

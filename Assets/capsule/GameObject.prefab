@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39de3153050b26849a1ffbdfd6738a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 15.12
 --- !u!136 &-8954328618099846244
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Capsule
       objectReference: {fileID: 0}
+    - target: {fileID: 2809776436526348990, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
+      propertyPath: explosionPrefab
+      value: 
+      objectReference: {fileID: 7065331171373752388, guid: da2dec7fb0ae1b84da9ad46cf8f62f77, type: 3}
     - target: {fileID: 3924577317589505278, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
       propertyPath: m_RootOrder
       value: 0

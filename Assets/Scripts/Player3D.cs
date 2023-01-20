@@ -11,13 +11,9 @@ public class Player3D : MonoBehaviour
     private float x;
     private float y;
     public static int lives = 10;
-    public static int miss = 0;
     private Vector3 screen;
-    public static float smoothTime = 10;
     private static float w=Screen.width/2.0f;
     private static float h=Screen.height/2.0f;
-    public static bool B=false;
-    public Quaternion quaternion;
     public GameObject Bullet;
     public GameObject explosionPrefab;
     public static int score=0;
@@ -54,7 +50,7 @@ public class Player3D : MonoBehaviour
         y = Input.GetAxis("Mouse Y");
         transform.Rotate(new Vector3(-y,0,-x),Space.Self);
         //显示UI
-        ScoreUI.text = ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n"+ "Missing: "+miss+"\n";
+        ScoreUI.text = ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
         
         if (playerState != State.Explosion)
         {
@@ -73,7 +69,6 @@ public class Player3D : MonoBehaviour
                 {
                     //这里是物体被击中后的代码
                     //hit.point是目标物体的位置
-                    B = true;
                     var direction = hit.point - transform.position;
                     var targetRotation = Quaternion.LookRotation(direction);
                     Debug.Log("扫描到对象");
@@ -85,6 +80,7 @@ public class Player3D : MonoBehaviour
                 }
             }
         }
+        //problematisch
         if (transform.position.x < -10f)
         {
             var transform1 = transform;
@@ -138,9 +134,11 @@ public class Player3D : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
+        //problematisch
         transform.position=new Vector3(0,-5,0);
         yield return new WaitForSeconds(3);
         StartCoroutine(blink());
+        //Problematisch
         while (transform.position.y<0)
         {
             float vertical1 = speed * Time.deltaTime;
