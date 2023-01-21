@@ -11,6 +11,7 @@ public class Player3D : MonoBehaviour
     private float x;
     private float y;
     public static int lives = 10;
+    public static float distance = 15;
     private Vector3 screen;
     private static float w=Screen.width/2.0f;
     private static float h=Screen.height/2.0f;
@@ -59,26 +60,32 @@ public class Player3D : MonoBehaviour
             transform.Translate(Vector3.right*amtToMove);
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
             transform.Translate(Vector3.up * vertical);
-            if (Input.GetMouseButtonDown(0))
-            {
+            
                 //子弹跟随准星方向发出
                 Ray ray = Camera.main.ScreenPointToRay(screen);
                 RaycastHit hit;
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out hit)&&hit.transform.tag!="Player"&&hit.transform.tag!="PlayersBullet")
                 {
                     //这里是物体被击中后的代码
                     //hit.point是目标物体的位置
-                    var direction = hit.point - transform.position;
-                    var targetRotation = Quaternion.LookRotation(direction);
-                    Debug.Log("扫描到对象");
-                    Instantiate(Bullet, transform.position, targetRotation);
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        var direction = hit.point - transform.position;
+                        var targetRotation = Quaternion.LookRotation(direction);
+                        Debug.Log("扫描到对象");
+                        Instantiate(Bullet, transform.position, targetRotation);
+                    }
                 }
                 else
                 {
-                    Instantiate(Bullet, transform.position, Quaternion.LookRotation(transform.up));
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        var q = Quaternion.LookRotation(ray.GetPoint(distance)- transform.position, transform.up);
+                        Instantiate(Bullet, transform.position, q);
+                    }
                 }
-            }
+                
         }
         //problematisch
         if (transform.position.x < -10f)

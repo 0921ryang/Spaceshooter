@@ -71,8 +71,8 @@ public class Enemy : MonoBehaviour {
         transform.localScale = Vector3.one * scale;
         Instantiate(Effect, transform.position, Quaternion.identity);
         SetSpeedAndPosition();
-        Player.score += 10;
-        Debug.Log("You have score"+Player.score);
+        Player3D.score += 10;
+        Debug.Log("You have score"+Player3D.score);
         Debug.Log(other.name);
     }
 }
