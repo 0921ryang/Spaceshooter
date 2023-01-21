@@ -10,9 +10,8 @@ public class MainScene : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            Player.lives = 10;
-            Player.score = 0;
-            Player.miss = 0;
+            Player3D.lives = 10;
+            Player3D.score = 0;
             SceneManager.LoadScene(1);
         }
     }
@@ -22,9 +21,8 @@ public class MainScene : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            Player.lives = 10;
-            Player.score = 0;
-            Player.miss = 0;
+            Player3D.lives = 10;
+            Player3D.score = 0;
             SceneManager.LoadScene(1);
         }
     }
