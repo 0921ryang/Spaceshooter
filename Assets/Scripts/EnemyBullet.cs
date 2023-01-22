@@ -5,6 +5,12 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     public float speed = 10f;
+    [SerializeField] private Art bulletArt;
+
+    enum Art
+    {
+        Boss, Normal
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -14,12 +20,27 @@ public class EnemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float amtToMove = speed * Time.deltaTime;
-        transform.Translate(Vector3.down*amtToMove,Space.Self);
-
-        if (transform.position.y < -8f)
+        switch (bulletArt)
         {
-            Destroy(gameObject);
+            case Art.Normal:
+            {
+                float amtToMove = speed * Time.deltaTime;
+                transform.Translate(Vector3.down*amtToMove,Space.Self);
+                if (transform.position.y < -8f)
+                {
+                    Destroy(gameObject);
+                }
+                return;
+            }
+            case Art.Boss:
+            {
+                transform.Translate(Vector3.forward*speed*Time.deltaTime);
+                if (transform.position.y < -8f)
+                {
+                    Destroy(gameObject);
+                }
+                return;
+            }
         }
     }
 }
