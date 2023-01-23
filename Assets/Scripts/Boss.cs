@@ -14,7 +14,13 @@ public class Boss : MonoBehaviour
     [SerializeField] private Image HP;
     private int bossHP = 76;
     private int currentHP;
+    [SerializeField] private BOSS Nummer;
+    public GameObject Effct;
     // Start is called before the first frame update
+    enum BOSS
+    {
+        Boss0,Boss1,Boss2
+    }
     void Start()
     {
         currentHP = bossHP;
@@ -31,11 +37,6 @@ public class Boss : MonoBehaviour
             Fire();
             currentTime = 0;
         }
-        
-        if (bossHP <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void Fire()
@@ -51,6 +52,11 @@ public class Boss : MonoBehaviour
         {
             currentHP -= 3;
             ChangeImageSize();
+            if (currentHP <= 0)
+            {
+                Instantiate(Effct, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
         }
     }
 
