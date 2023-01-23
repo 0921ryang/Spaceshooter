@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SchleimEnemy : MonoBehaviour
+public class Bomb : MonoBehaviour
 {
-       private float _speed;
+    private float _speed;
     public GameObject Effect;
     [SerializeField] public float minSpeed = 0.5f;
     [SerializeField] public float maxSpeed = 2f;
@@ -16,12 +16,11 @@ public class SchleimEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Random.InitState(123);
         rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         maxScale.x = 0.5f;
-        maxScale.y = 2f;
+        maxScale.y = 1f;
         transform.Rotate(Time.deltaTime*rotationSpeed);
         float scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;
@@ -43,6 +42,7 @@ public class SchleimEnemy : MonoBehaviour
         rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+        Debug.Log("Current lives: "+Player.lives);
         SetSpeedAndPosition();
         float scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;

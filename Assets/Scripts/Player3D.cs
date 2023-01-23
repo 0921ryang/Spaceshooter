@@ -91,29 +91,7 @@ public class Player3D : MonoBehaviour
                 }
                 
         }
-        //problematisch
-        if (transform.position.x < -10f)
-        {
-            var transform1 = transform;
-            var position = transform1.position;
-            position= new Vector3(10f, position.y, position.z);
-            transform1.position = position;
-        }
-        else if (transform.position.x>10f)
-        {
-            transform.position = new Vector3(-10f, transform.position.y, transform.position.z);
-        }else if (transform.position.y > 5f)
-        {
-            var transform1 = transform;
-            var position = transform1.position;
-            position = new Vector3(position.x, -5f, position.z);
-            transform1.position = position;
-        }
-        else if(transform.position.y<-5f)
-        {
-            transform.position = new Vector3(transform.position.x, 5f, transform.position.z);
-        }
-
+        
         if (Input.GetKeyDown("escape"))
         {
             SceneManager.LoadScene(0);
@@ -143,9 +121,9 @@ public class Player3D : MonoBehaviour
 
     private IEnumerator Slow()
     {
-        speed = 3;
+        speed = 2;
         StartCoroutine(Mud());
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(10);
         speed = 8;
     }
 
