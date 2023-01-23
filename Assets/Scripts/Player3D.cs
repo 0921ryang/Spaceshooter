@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Player3D : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class Player3D : MonoBehaviour
     private Vector3 screen;
     private static float w=Screen.width/2.0f;
     private static float h=Screen.height/2.0f;
+    public Image image;
     public GameObject Bullet;
     public GameObject explosionPrefab;
     public static int score=0;
@@ -32,6 +35,7 @@ public class Player3D : MonoBehaviour
     {
         Cursor.visible = false;
         screen = new Vector3(w, h, 0.0f);
+        image.enabled = false;
     }
 
     // Update is called once per frame
@@ -130,9 +134,27 @@ public class Player3D : MonoBehaviour
             Instantiate(explosionPrefab, transform.position, other.transform.rotation);
             playerState = State.Explosion;
             StartCoroutine(destroy());
+        }else if (other.CompareTag("Schleim"))
+        {
+            StartCoroutine(Slow());
         }
+            
     }
 
+    private IEnumerator Slow()
+    {
+        speed = 3;
+        StartCoroutine(Mud());
+        yield return new WaitForSeconds(3);
+        speed = 8;
+    }
+
+    private IEnumerator Mud()
+    {
+        image.enabled = true;
+        yield return new WaitForSeconds(1);
+        image.enabled = false;
+    }
     private IEnumerator destroy()
     {
         GetComponent<Renderer>().enabled = false;

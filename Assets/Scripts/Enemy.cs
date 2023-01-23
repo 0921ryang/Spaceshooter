@@ -42,12 +42,10 @@ public class Enemy : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        Player.miss++;
         //Debug.Log("yes");
         rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        Player.lives--;
         Debug.Log("Current lives: "+Player.lives);
         SetSpeedAndPosition();
         float scale = Random.Range(maxScale.x, maxScale.y);
@@ -71,9 +69,12 @@ public class Enemy : MonoBehaviour {
         transform.localScale = Vector3.one * scale;
         Instantiate(Effect, transform.position, Quaternion.identity);
         SetSpeedAndPosition();
-        Player3D.score += 10;
-        Debug.Log("You have score"+Player3D.score);
-        Debug.Log(other.name);
+        if (other.CompareTag("Player") || other.CompareTag("PlayersBullet"))
+        {
+            Player3D.score += 10;
+            Debug.Log("You have score"+Player3D.score);
+            Debug.Log(other.name);
+        }
     }
 }
 
