@@ -6499,6 +6499,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 304350765}
     - target: {fileID: 5299907993846010473, guid: ad983e19fd15f90458398bf4021c4fcb, type: 3}
+      propertyPath: Effct
+      value: 
+      objectReference: {fileID: 2217660827484867040, guid: 95e58e3248b4da54c967851a178543fb, type: 3}
+    - target: {fileID: 5299907993846010473, guid: ad983e19fd15f90458398bf4021c4fcb, type: 3}
       propertyPath: Point
       value: 
       objectReference: {fileID: 1580238881}
@@ -6575,6 +6579,10 @@ PrefabInstance:
       propertyPath: HP
       value: 
       objectReference: {fileID: 366203538}
+    - target: {fileID: 5983189021448605449, guid: 3e369bde36e71c64092ccbe1a60ba41b, type: 3}
+      propertyPath: Effct
+      value: 
+      objectReference: {fileID: 2217660827484867040, guid: 95e58e3248b4da54c967851a178543fb, type: 3}
     - target: {fileID: 5983189021448605449, guid: 3e369bde36e71c64092ccbe1a60ba41b, type: 3}
       propertyPath: Point
       value: 
@@ -6688,6 +6696,10 @@ PrefabInstance:
       propertyPath: HP
       value: 
       objectReference: {fileID: 101906887}
+    - target: {fileID: 6375189035932754526, guid: 6bbe7c47a12f11f4c83b5dfa7c7de17a, type: 3}
+      propertyPath: Effct
+      value: 
+      objectReference: {fileID: 2217660827484867040, guid: 95e58e3248b4da54c967851a178543fb, type: 3}
     - target: {fileID: 6375189035932754526, guid: 6bbe7c47a12f11f4c83b5dfa7c7de17a, type: 3}
       propertyPath: Point
       value: 

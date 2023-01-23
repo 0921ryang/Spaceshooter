@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,7 @@ public class Boss : MonoBehaviour
     private int bossHP = 76;
     private int currentHP;
     [SerializeField] private BOSS Nummer;
-    public GameObject Effct;
-    // Start is called before the first frame update
+    public GameObject Effct;//explosion effect
     enum BOSS
     {
         Boss0,Boss1,Boss2
@@ -29,6 +29,7 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.forward = player.transform.position - transform.position;
         transform.RotateAround(Point.transform.position, rotationAxis, MoveSpeed * Time.deltaTime);
         //Way of attack（no idea yet）
         currentTime += Time.deltaTime;
@@ -36,6 +37,26 @@ public class Boss : MonoBehaviour
         {
             Fire();
             currentTime = 0;
+        }
+
+        if (currentHP <= 40)
+        {
+            switch (Nummer)
+            {
+                case BOSS.Boss0:
+                {
+                    
+                    return;
+                }
+                case BOSS.Boss1:
+                {
+                    return;
+                }
+                case BOSS.Boss2:
+                {
+                    return;
+                }
+            }
         }
     }
 
