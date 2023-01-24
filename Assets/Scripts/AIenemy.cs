@@ -9,10 +9,11 @@ using Random = UnityEngine.Random;
 public class AIenemy : MonoBehaviour
 {
     [SerializeField]
-    private Rigidbody playerPosition;//玩家位置
+    private Rigidbody playerPosition;
     [SerializeField]
     private float moveSpeed;
     [SerializeField] private int minXPosition, maxXPosition,YPosition;
+    //Beschränkung des Raums für Enemy
     [SerializeField] private Art art;
     public GameObject Bullet;
     public int aiLives = 5;
@@ -24,14 +25,14 @@ public class AIenemy : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(Random.Range(minXPosition,maxXPosition),YPosition,0);
-        //AI出现的位置，两个XPosition指定一个范围然后随机刷新，然后y轴就自己改了
+        // Enemy wird in diesem Raum beliebig erstellt
     }
     // Update is called once per frame
     void Update()
     {
         
     }
-    public float fireRate = 1f;//射击频率
+    public float fireRate = 1f;//die Frequenz des Angriffs
     private float nextFire = 0.0f;
     private bool toEnd = true;
     private void FixedUpdate()
@@ -41,15 +42,15 @@ public class AIenemy : MonoBehaviour
             case Art.DistanceKeep:
             {
                 transform.Translate(moveSpeed*new Vector3(playerPosition.position.x-transform.position.x,
-                    0,
-                    playerPosition.position.z-transform.position.z)*Time.deltaTime);
-                //上面就是追踪玩家，只对x轴的位置
+                    playerPosition.position.y-transform.position.y+8,
+                    playerPosition.position.z-transform.position.z)*Time.deltaTime); 
+                //es liegt vor Player und folgt immer den Player und beleibt es immer in y-Achse  mit 8 Einheiten zu Player;
                 if (Time.time>nextFire)
                 {
                     nextFire = Time.time + fireRate;
                     Instantiate(Bullet, transform.position, transform.rotation);
                 }
-                //让子弹射击按设定的时间触发
+                //Fire in einer bestimmten Zeit. Man kann es durch die Veränderung von "fireRate" setzen
                 return;
             }
             case Art.Moving:
@@ -60,21 +61,21 @@ public class AIenemy : MonoBehaviour
                 transform.Translate(amtToMove,Space.World);
                 if (Vector3.Distance(transform.position, nextPosition) < amtToMove.magnitude)
                 {
-                    toEnd = !toEnd;//反转目标点位
+                    toEnd = !toEnd;
                 }
                 if (Time.time>nextFire)
                 {
                     nextFire = Time.time + fireRate;
                     Instantiate(Bullet, transform.position, transform.rotation);
                 }
-                //这里就是一个不会追踪，但是会在固定范围内来回移动并且定时射击
+                //es bewegt immer im bestimmten Bereich(maxXPosition , minXPosition) und schießen
                 return;
             }
             
         }
     }
     
-    public GameObject Effect;//爆炸效果
+    public GameObject Effect;//Explosion Effect
 
     private void OnTriggerEnter(Collider other)
     {
