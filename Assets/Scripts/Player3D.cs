@@ -21,7 +21,7 @@ public class Player3D : MonoBehaviour
     public GameObject Bullet;
     public GameObject explosionPrefab;
     public static int score=0;
-    public TMPro.TextMeshPro ScoreUI;
+    public TMPro.TMP_Text ScoreUI;
 
     public enum State
     {
@@ -107,8 +107,15 @@ public class Player3D : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy")&&playerState==State.Playing)
+        if ((other.CompareTag("Enemy")||other.CompareTag("Explosion"))&&playerState==State.Playing)
         {
+            if(other.CompareTag("Enemy"))
+            {
+                lives--;
+            }else
+            {
+                lives -= 3;
+            }
             Instantiate(explosionPrefab, transform.position, other.transform.rotation);
             playerState = State.Explosion;
             StartCoroutine(destroy());
@@ -136,7 +143,6 @@ public class Player3D : MonoBehaviour
     private IEnumerator destroy()
     {
         GetComponent<Renderer>().enabled = false;
-        lives--;
         if (lives <= 0)
         {
             SceneManager.LoadScene(2);
