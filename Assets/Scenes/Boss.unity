@@ -6591,6 +6591,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 762139309}
+    - target: {fileID: 5983189021448605449, guid: 3e369bde36e71c64092ccbe1a60ba41b, type: 3}
+      propertyPath: Schleim
+      value: 
+      objectReference: {fileID: 5327009349190246661, guid: 83d06f52720c27747aa78a9c68031641, type: 3}
     - target: {fileID: 5983189021448605450, guid: 3e369bde36e71c64092ccbe1a60ba41b, type: 3}
       propertyPath: m_RootOrder
       value: 6

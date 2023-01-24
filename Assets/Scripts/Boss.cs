@@ -16,7 +16,8 @@ public class Boss : MonoBehaviour
     private int bossHP = 76;
     private int currentHP;
     [SerializeField] private BOSS Nummer;
-    public GameObject Effct;//explosion effect
+    public GameObject Effct; //explosion effect
+    public GameObject Schleim;
     enum BOSS
     {
         Boss0,Boss1,Boss2
@@ -31,21 +32,20 @@ public class Boss : MonoBehaviour
     {
         transform.forward = player.transform.position - transform.position;
         transform.RotateAround(Point.transform.position, rotationAxis, MoveSpeed * Time.deltaTime);
-        //Way of attack（no idea yet）
+        //Way of attack
         currentTime += Time.deltaTime;
         if (currentTime > fireTime)
         {
             Fire();
             currentTime = 0;
         }
-
+        
         if (currentHP <= 40)
         {
             switch (Nummer)
             {
                 case BOSS.Boss0:
                 {
-                    
                     return;
                 }
                 case BOSS.Boss1:
