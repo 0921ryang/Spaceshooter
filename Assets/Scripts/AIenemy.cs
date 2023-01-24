@@ -18,7 +18,7 @@ public class AIenemy : MonoBehaviour
     public int aiLives = 5;
     public enum Art
     {
-        Chase, Moving,   
+        DistanceKeep, Moving,   
     }
     // Start is called before the first frame update
     void Start()
@@ -38,7 +38,7 @@ public class AIenemy : MonoBehaviour
     {
         switch (art)
         { 
-            case Art.Chase:
+            case Art.DistanceKeep:
             {
                 transform.Translate(moveSpeed*new Vector3(playerPosition.position.x-transform.position.x,0,
                     playerPosition.position.z-transform.position.z)*Time.deltaTime);
