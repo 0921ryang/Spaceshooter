@@ -22,6 +22,7 @@ public class Player3D : MonoBehaviour
     public GameObject explosionPrefab;
     public static int score=0;
     public TMPro.TMP_Text ScoreUI;
+    public TMPro.TMP_Text Respawn;
 
     public enum State
     {
@@ -36,6 +37,7 @@ public class Player3D : MonoBehaviour
         Cursor.visible = false;
         screen = new Vector3(w, h, 0.0f);
         image.enabled = false;
+        Respawn.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,7 +57,7 @@ public class Player3D : MonoBehaviour
         y = Input.GetAxis("Mouse Y");
         transform.Rotate(new Vector3(-y,0,-x),Space.Self);
         //显示UI
-        ScoreUI.text = ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
+        ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
         
         if (playerState != State.Explosion)
         {
@@ -147,19 +149,17 @@ public class Player3D : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
-        //problematisch
-        transform.position=new Vector3(0,-5,0);
+        Respawn.color=Color.red;
+        Respawn.text = "respawning!" ;
+        Respawn.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
+        Respawn.color=Color.green;
+        Respawn.text = "respawned!";
+        Respawn.gameObject.SetActive(true);
         StartCoroutine(blink());
-        //Problematisch
-        while (transform.position.y<0)
-        {
-            float vertical1 = speed * Time.deltaTime;
-            transform.Translate(Vector3.up * vertical1);
-            yield return null;
-        }
         playerState = State.Invincible;
         yield return new WaitForSeconds(2);
+        Respawn.gameObject.SetActive(false);
         playerState = State.Playing;
     }
 

@@ -14,12 +14,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //float amtToMove = speed * Time.deltaTime;
-        //transform.Translate(Vector3.up*amtToMove,Space.Self);
-        if (transform.position.y > 6f)
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
     void OnTriggerEnter(Collider other)

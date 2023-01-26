@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public GameObject playerPos;
     public float speed = 50f;
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,7 @@ public class Projectile : MonoBehaviour
     {
         float amtToMove = speed * Time.deltaTime;
         transform.Translate(Vector3.forward*amtToMove,Space.Self);
-        if (transform.position.y > 8f)
+        if (Vector3.Distance(playerPos.transform.position,transform.position) > 150)
         {
             Destroy(gameObject);
         }
