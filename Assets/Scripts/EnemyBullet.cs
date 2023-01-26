@@ -26,7 +26,7 @@ public class EnemyBullet : MonoBehaviour
             {
                 float amtToMove = speed * Time.deltaTime;
                 transform.Translate(Vector3.down*amtToMove,Space.Self);
-                if (transform.position.y < -8f)
+                if (transform.position.y < -20f)
                 {
                     Destroy(gameObject);
                 }
@@ -35,7 +35,7 @@ public class EnemyBullet : MonoBehaviour
             case Art.Boss:
             {
                 transform.Translate(Vector3.forward*speed*Time.deltaTime);
-                if (transform.position.y < -8f)
+                if (transform.position.y < -20f)
                 {
                     Destroy(gameObject);
                 }

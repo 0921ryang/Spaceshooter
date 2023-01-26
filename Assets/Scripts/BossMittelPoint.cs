@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class BossMittelPoint : MonoBehaviour
 {
-    public GameObject Boss1;
-    public GameObject Boss2;
-    public GameObject Boss3;
-    
+    public GameObject shield;
+    private float shieldCD;
+    public Boss B0;
+    public Boss B1;
+    public Boss B2;
+    private float shieldEnd;
+    [SerializeField] private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +22,23 @@ public class BossMittelPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        shieldCD += Time.deltaTime;
+        shieldEnd += Time.deltaTime;
+        if (shieldCD > 20)
+        {
+            Instantiate(shield, transform.position, transform.rotation);
+            B0.SetShield(true);
+            B1.SetShield(true);
+            B2.SetShield(true);
+            shieldCD = 0;
+        }
+        if (shieldEnd >= 25)
+        {
+            B0.SetShield(false);
+            B1.SetShield(false);
+            B2.SetShield(false);
+            shieldEnd = 0;
+        }
     }
     private void OnDrawGizmos()
     {

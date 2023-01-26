@@ -13,6 +13,7 @@ public class Boss : MonoBehaviour
     [SerializeField] private GameObject Bullet;
     public GameObject Effct; //explosion effect
     public BossHPUI UI;
+    private bool hasShield;
     void Start()
     {
        
@@ -21,7 +22,6 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.forward = player.transform.position - transform.position;
         transform.RotateAround(Point.transform.position, rotationAxis, MoveSpeed * Time.deltaTime);
         //Way of attack
         currentTime += Time.deltaTime;
@@ -41,9 +41,14 @@ public class Boss : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayersBullet"))
+        if (other.CompareTag("PlayersBullet") && !hasShield)
         {
-            UI.ChangeHP(3);
+            UI.ChangeHP(1);
         }
+    }
+
+    public void SetShield(bool b)
+    {
+        hasShield = b;
     }
 }
