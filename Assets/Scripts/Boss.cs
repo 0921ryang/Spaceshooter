@@ -11,20 +11,11 @@ public class Boss : MonoBehaviour
     [SerializeField]private float fireTime;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject Bullet;
-    //Boss  HP UI
-    [SerializeField] private Image HP;
-    private int bossHP = 76;
-    private int currentHP;
-    [SerializeField] private BOSS Nummer;
     public GameObject Effct; //explosion effect
-    public GameObject Schleim;
-    enum BOSS
-    {
-        Boss0,Boss1,Boss2
-    }
+    public BossHPUI UI;
     void Start()
     {
-        currentHP = bossHP;
+       
     }
 
     // Update is called once per frame
@@ -39,25 +30,6 @@ public class Boss : MonoBehaviour
             Fire();
             currentTime = 0;
         }
-        
-        if (currentHP <= 40)
-        {
-            switch (Nummer)
-            {
-                case BOSS.Boss0:
-                {
-                    return;
-                }
-                case BOSS.Boss1:
-                {
-                    return;
-                }
-                case BOSS.Boss2:
-                {
-                    return;
-                }
-            }
-        }
     }
 
     private void Fire()
@@ -71,18 +43,7 @@ public class Boss : MonoBehaviour
     {
         if (other.CompareTag("PlayersBullet"))
         {
-            currentHP -= 3;
-            ChangeImageSize();
-            if (currentHP <= 0)
-            {
-                Instantiate(Effct, transform.position, transform.rotation);
-                Destroy(gameObject);
-            }
+            UI.ChangeHP(3);
         }
-    }
-
-    private void ChangeImageSize()
-    {
-        HP.rectTransform.sizeDelta = new Vector2(currentHP, 7);
     }
 }

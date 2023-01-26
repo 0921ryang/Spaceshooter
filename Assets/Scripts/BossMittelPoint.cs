@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class BossMittelPoint : MonoBehaviour
 {
+    public GameObject Boss1;
+    public GameObject Boss2;
+    public GameObject Boss3;
+    
     // Start is called before the first frame update
     void Start()
     {
