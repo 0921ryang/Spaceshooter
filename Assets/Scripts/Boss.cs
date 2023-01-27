@@ -14,7 +14,8 @@ public class Boss : MonoBehaviour
     public GameObject Effct; //explosion effect
     public BossHPUI UI;// UI um aktuell HP zu zeigen
     private bool hasShield;//prüfen, ob jetzt Boss Shield hat
-   
+    //hier ist Script für jeden Teil des Boss. Jeder Teil kann schießen, und wenn ein Teil des Boss von Player geschossen wird, nimmt HP ab
+    // Aber die besondere Fähigkeit hat ich in Script "BossMittelPoint" geschrieben. 
     void Start()
     {
        
@@ -24,7 +25,7 @@ public class Boss : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-        if (currentTime > fireTime)
+        if (currentTime > fireTime)//fireTime ist Frequenz des Angriff aus BOSS
         {
             Fire();
             currentTime = 0;
