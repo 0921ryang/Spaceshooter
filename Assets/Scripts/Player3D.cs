@@ -23,6 +23,7 @@ public class Player3D : MonoBehaviour
     public static int score=0;
     public TMPro.TMP_Text ScoreUI;
     public TMPro.TMP_Text Respawn;
+    public TMPro.TMP_Text Bounds;
 
     public enum State
     {
@@ -38,6 +39,7 @@ public class Player3D : MonoBehaviour
         screen = new Vector3(w, h, 0.0f);
         image.enabled = false;
         Respawn.gameObject.SetActive(false);
+        Bounds.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -66,8 +68,20 @@ public class Player3D : MonoBehaviour
             transform.Translate(Vector3.right*amtToMove);
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
             transform.Translate(Vector3.up * vertical);
-            
-                //子弹跟随准星方向发出
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -200, 200), transform.position.y,
+                transform.position.z);
+            if (transform.position.x >= 199 || transform.position.x <= -199 || transform.position.z <= -199 ||
+                transform.position.z >= 199)
+            {
+                Bounds.color=Color.red;
+                Bounds.gameObject.SetActive(true);
+                
+            }
+            else
+            {
+                Bounds.gameObject.SetActive(false);
+            }
+            //子弹跟随准星方向发出
                 Ray ray = Camera.main.ScreenPointToRay(screen);
                 RaycastHit hit;
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
@@ -153,9 +167,7 @@ public class Player3D : MonoBehaviour
         Respawn.text = "respawning!" ;
         Respawn.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
-        Respawn.color=Color.green;
-        Respawn.text = "respawned!";
-        Respawn.gameObject.SetActive(true);
+        Respawn.gameObject.SetActive(false);
         StartCoroutine(blink());
         playerState = State.Invincible;
         yield return new WaitForSeconds(2);

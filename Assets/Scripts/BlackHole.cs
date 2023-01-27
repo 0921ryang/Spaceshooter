@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class BlackHole : MonoBehaviour
 {
-    public static float speed = 0.2f;
+    public float speed = 0.05f;
     Coroutine moveCoroutine;
     // Start is called before the first frame update
     void Start()
@@ -39,11 +39,11 @@ public class BlackHole : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        if (other.CompareTag("Player"))
+        if (other!=null&&other.CompareTag("Player"))
         {
             SceneManager.LoadScene(2);
         }
-        else
+        else if(other!=null)
         {
             Destroy(other);
         }
