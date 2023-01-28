@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class BlackHole : MonoBehaviour
 {
-    public float speed = 0.05f;
-    Coroutine moveCoroutine;
+    public float speed = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,31 +20,28 @@ public class BlackHole : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        moveCoroutine=StartCoroutine(MoveTowards(other));
+        if (other!=null&&!other.CompareTag("BlackHole")&&Vector3.Distance(other.transform.position, transform.position) > 50f)
+        {
+            Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+            if (otherRigidbody != null)
+            {
+                Vector3 force = (transform.position - other.transform.position).normalized * speed*Time.deltaTime;
+               otherRigidbody.velocity+=force;
+            }
+
+        }else if (other!=null&&other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(2);
+        }
+        else if(other!=null&&!other.CompareTag("BlackHole"))
+        {
+            Destroy(other);
+        } 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        StopCoroutine(moveCoroutine);
-    }
-
-    IEnumerator MoveTowards(Collider other)
-    {
-        while (other!=null&&Vector3.Distance(other.transform.position, transform.position) > 50f)
-        {
-            other.transform.position = Vector3.MoveTowards(other.transform.position, transform.position, speed );
-            yield return new WaitForEndOfFrame();
-        }
-
-        if (other!=null&&other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(2);
-        }
-        else if(other!=null)
-        {
-            Destroy(other);
-        }
     }
 }

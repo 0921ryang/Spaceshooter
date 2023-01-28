@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class Player3D : MonoBehaviour
 {
-    public float speed = 8f;
+    public float speed = 15f;
     private float x;
     private float y;
     public static int lives = 10;
@@ -24,6 +24,9 @@ public class Player3D : MonoBehaviour
     public TMPro.TMP_Text ScoreUI;
     public TMPro.TMP_Text Respawn;
     public TMPro.TMP_Text Bounds;
+    private Rigidbody rb;
+    public static Vector3 trans;
+    private static bool stop;
 
     public enum State
     {
@@ -40,6 +43,10 @@ public class Player3D : MonoBehaviour
         image.enabled = false;
         Respawn.gameObject.SetActive(false);
         Bounds.gameObject.SetActive(false);
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        trans = transform.position;
+        stop = true;
     }
 
     // Update is called once per frame
@@ -57,7 +64,17 @@ public class Player3D : MonoBehaviour
         //三维旋转
         x = Input.GetAxis("Mouse X");
         y = Input.GetAxis("Mouse Y");
-        transform.Rotate(new Vector3(-y,0,-x),Space.Self);
+        //transform.Rotate(new Vector3(-y,0,-x),Space.Self);
+        if (x != 0 || y != 0)
+        {
+            rb.freezeRotation = false;
+            rb.AddRelativeTorque(new Vector3(-y,0,-x));
+        }
+        else
+        {
+            rb.freezeRotation = true;
+        }
+        
         //显示UI
         ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
         
@@ -65,13 +82,25 @@ public class Player3D : MonoBehaviour
         {
             //移动
             float amtToMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-            transform.Translate(Vector3.right*amtToMove);
+            //transform.Translate(Vector3.right*amtToMove);
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-            transform.Translate(Vector3.up * vertical);
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -200, 200), transform.position.y,
+            //transform.Translate(Vector3.up * vertical);
+            //rb.AddRelativeForce(Vector3.right * amtToMove, ForceMode.VelocityChange);
+            //rb.AddRelativeForce(Vector3.up * vertical, ForceMode.VelocityChange);
+            if (amtToMove != 0 || vertical != 0)
+            {
+                stop = true;
+                rb.velocity = rb.velocity + transform.right * amtToMove + transform.up * vertical;
+            }
+            else if(stop)
+            {
+                rb.velocity = Vector3.zero;
+                stop = false;
+            }
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -500, 500), transform.position.y,
                 transform.position.z);
-            if (transform.position.x >= 199 || transform.position.x <= -199 || transform.position.z <= -199 ||
-                transform.position.z >= 199)
+            if (transform.position.x >= 499 || transform.position.x <= -499 || transform.position.z <= -499 ||
+                transform.position.z >= 499)
             {
                 Bounds.color=Color.red;
                 Bounds.gameObject.SetActive(true);
@@ -82,30 +111,29 @@ public class Player3D : MonoBehaviour
                 Bounds.gameObject.SetActive(false);
             }
             //子弹跟随准星方向发出
-                Ray ray = Camera.main.ScreenPointToRay(screen);
-                RaycastHit hit;
-                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
-                if (Physics.Raycast(ray, out hit)&&hit.transform.tag!="Player"&&hit.transform.tag!="PlayersBullet")
+            Ray ray = Camera.main.ScreenPointToRay(screen); 
+            RaycastHit hit;
+            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
+            if (Physics.Raycast(ray, out hit)&&hit.transform.tag!="Player"&&hit.transform.tag!="PlayersBullet")
+            {
+                //这里是物体被击中后的代码
+                //hit.point是目标物体的位置
+                if (Input.GetMouseButtonDown(0))
                 {
-                    //这里是物体被击中后的代码
-                    //hit.point是目标物体的位置
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        var direction = hit.point - transform.position;
-                        var targetRotation = Quaternion.LookRotation(direction);
-                        Debug.Log("扫描到对象");
-                        Instantiate(Bullet, transform.position, targetRotation);
-                    }
+                    var direction = hit.point - transform.position;
+                    var targetRotation = Quaternion.LookRotation(direction);
+                    Debug.Log("扫描到对象");
+                    Instantiate(Bullet, transform.position, targetRotation).AddComponent<Projectile>().main=gameObject;
                 }
-                else
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        var q = Quaternion.LookRotation(ray.GetPoint(distance)- transform.position, transform.up);
-                        Instantiate(Bullet, transform.position, q);
-                    }
+                    var q = Quaternion.LookRotation(ray.GetPoint(distance)- transform.position, transform.up);
+                    Instantiate(Bullet, transform.position, q).AddComponent<Projectile>().main=gameObject;
                 }
-                
+            }
         }
         
         if (Input.GetKeyDown("escape"))
