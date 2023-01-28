@@ -14,11 +14,13 @@ public class Boss : MonoBehaviour
     public GameObject Effct; //explosion effect
     public BossHPUI UI;// UI um aktuell HP zu zeigen
     private bool hasShield;//prüfen, ob jetzt Boss Shield hat
+    private bool hasSatellit;
+    private float HeilenCD;
     //hier ist Script für jeden Teil des Boss. Jeder Teil kann schießen, und wenn ein Teil des Boss von Player geschossen wird, nimmt HP ab
     // Aber die besondere Fähigkeit hat ich in Script "BossMittelPoint" geschrieben. 
     void Start()
     {
-       
+        hasSatellit = false;
     }
 
     // Update is called once per frame
@@ -31,13 +33,19 @@ public class Boss : MonoBehaviour
             currentTime = 0;
         }
         transform.RotateAround(Point.transform.position, rotationAxis, MoveSpeed * Time.deltaTime);
+        HeilenCD += Time.deltaTime;
+        if (hasSatellit && HeilenCD>=1)
+        {
+            UI.Heiling(3);
+            HeilenCD = 0;
+        }
+        
     }
 
     private void Fire()
     {
-        GameObject prefabs = Instantiate(Bullet, transform.position, transform.rotation);
-        transform.rotation = Quaternion.LookRotation(player.transform.position - transform.position);
-        prefabs.transform.LookAt(player.transform.position);
+        transform.LookAt(player.transform.position);
+        Instantiate(Bullet, transform.position, transform.rotation).AddComponent<BossBullet>().main = gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,8 +58,6 @@ public class Boss : MonoBehaviour
                 Instantiate(Effct, transform.position, transform.rotation);
                 Instantiate(Effct, transform.position, transform.rotation);
                 Instantiate(Effct, transform.position, transform.rotation);
-                Instantiate(Effct, transform.position, transform.rotation);
-                Instantiate(Effct, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
         }
@@ -60,5 +66,10 @@ public class Boss : MonoBehaviour
     public void SetShield(bool b)
     {
         hasShield = b;
+    }
+
+    public void SetSatellit(bool boolean)
+    {
+        hasSatellit = boolean;
     }
 }

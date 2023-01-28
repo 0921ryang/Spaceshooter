@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4526093941279807497}
   - component: {fileID: 3164531581032344454}
   - component: {fileID: 2174656219069983251}
-  - component: {fileID: 5238582894183682536}
+  - component: {fileID: -5543817824732356997}
   m_Layer: 0
   m_Name: BossBullet
   m_TagString: Enemy
@@ -98,7 +98,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5238582894183682536
+--- !u!114 &-5543817824732356997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,8 +107,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4359966033286518256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e102639b0b7e6f40a0c71ea6ff1da2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e54d493b7c9e224cb1e2b573328226a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  bulletArt: 0
+  speed: 40
+  main: {fileID: 4359966033286518256}

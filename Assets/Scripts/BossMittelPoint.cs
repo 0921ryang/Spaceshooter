@@ -12,34 +12,58 @@ public class BossMittelPoint : MonoBehaviour
     public Boss B0;
     public Boss B1;
     public Boss B2;
-    private float shieldEnd;
+    private GameObject shieldCopy;
     [SerializeField] private GameObject player;// Target für weitere Fähigkeiten...
+    //Satellit Setting
+    public GameObject Satellit;
+    private int count;
+    private float check;
+    private GameObject tempSatellit;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        count = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Schild
         shieldCD += Time.deltaTime;
-        shieldEnd += Time.deltaTime;
         if (shieldCD > 20)//jede 20 Sekunden benutzt Boss Schild
         {
-            Instantiate(shield, transform.position, transform.rotation);
+            shieldCopy = Instantiate(shield, transform.position, transform.rotation);
             B0.SetShield(true);
             B1.SetShield(true);
             B2.SetShield(true);
             shieldCD = 0;
         }
-        if (shieldEnd >= 25)//es dauert 5 Sekunden
+        if (shieldCopy.IsDestroyed())//es dauert 5 Sekunden
         {
             B0.SetShield(false);
             B1.SetShield(false);
             B2.SetShield(false);
-            shieldEnd = 0;
         }
+        //Satellit
+        if (count==0 && B0.UI.getCurrentHP() <= 150)
+        {
+            tempSatellit = Instantiate(Satellit,transform.position+new Vector3(15f,-1f,0),transform.rotation);
+            count = 1;
+        }
+
+        check += Time.deltaTime;
+        if (count == 1 && check>=1f)
+        {
+            B0.UI.Heiling(3);
+            check = 0;
+        }
+
+        if (tempSatellit.IsDestroyed())
+        {
+            count = 2;
+        }
+        
     }
     private void OnDrawGizmos()
     {
