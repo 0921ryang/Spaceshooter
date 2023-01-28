@@ -9,6 +9,7 @@ TagManager:
   - SchleimEnemy
   - Schleim
   - Explosion
+  - Hindernis
   layers:
   - Default
   - TransparentFX

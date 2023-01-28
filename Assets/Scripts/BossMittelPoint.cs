@@ -19,11 +19,18 @@ public class BossMittelPoint : MonoBehaviour
     private int count;
     private float check;
     private GameObject tempSatellit;
-    
+    //Meteorit
+    public GameObject Meteorit;
+    private float Min;
+    private float Max;
+    private float Frequenz;
     // Start is called before the first frame update
     void Start()
     {
         count = 0;
+        Min = transform.position.x - 30;
+        Max = transform.position.x + 30;
+
     }
 
     // Update is called once per frame
@@ -51,19 +58,24 @@ public class BossMittelPoint : MonoBehaviour
             tempSatellit = Instantiate(Satellit,transform.position+new Vector3(15f,-1f,0),transform.rotation);
             count = 1;
         }
-
         check += Time.deltaTime;
         if (count == 1 && check>=1f)
         {
             B0.UI.Heiling(3);
             check = 0;
         }
-
         if (tempSatellit.IsDestroyed())
         {
             count = 2;
         }
-        
+        // zufällig Meteorit
+        Frequenz += Time.deltaTime;
+        if (Frequenz > 0.1f)
+        {
+            Instantiate(Meteorit, new Vector3(Random.Range(Min,Max),player.transform.position.y + 20, player.transform.position.z), transform.rotation);
+            Frequenz = 0;
+        }
+
     }
     private void OnDrawGizmos()
     {

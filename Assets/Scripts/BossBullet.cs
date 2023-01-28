@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,14 @@ public class BossBullet : MonoBehaviour
         float amtToMove = speed * Time.deltaTime;
         transform.Translate(Vector3.forward*amtToMove,Space.Self);
         if (Vector3.Distance(main.transform.position, transform.position) > 150)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") || other.CompareTag("Hindernis"))
         {
             Destroy(gameObject);
         }
