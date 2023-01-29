@@ -17,32 +17,15 @@ public class Bullet : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        Collider other = collision.collider;
-        if (other.CompareTag("Enemy"))
+        var collideWith = other.GetComponent<Enemy>();
+        collideWith.maxSpeed += .2f;
+        collideWith.minSpeed += .2f;
+        Destroy(gameObject);
+        if (collideWith != null)
         {
-            var collideWith = other.GetComponent<Enemy>();
-            var collideWith1 = other.GetComponent<Bomb>();
-            if (collideWith == null)
-            {
-                collideWith1.maxSpeed += 0.1f;
-                collideWith1.minSpeed += 0.1f;
-            }
-            else
-            {
-                collideWith.maxSpeed += 0.1f;
-                collideWith.minSpeed += 0.1f;
-            }
-        }else if (other.CompareTag("Schleim"))
-        {
-            var collideWith = other.GetComponent<SchleimEnemy>();
-            collideWith.maxSpeed += .2f;
-            collideWith.minSpeed += .2f;
-        }
-        if (!other.CompareTag("Player"))
-        {
-            Destroy(gameObject);
+            //explosionPrefab;
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Debug.Log("We hit: " + other.name);
         }
