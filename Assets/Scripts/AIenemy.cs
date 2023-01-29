@@ -41,7 +41,6 @@ public class AIenemy : MonoBehaviour
         { 
             case Art.DistanceKeep:
             {
-                Debug.Log(transform.position);
                 transform.Translate(moveSpeed*new Vector3(playerPosition.position.x-transform.position.x,
                     playerPosition.position.y-transform.position.y+8,
                     playerPosition.position.z-transform.position.z)*Time.deltaTime); 

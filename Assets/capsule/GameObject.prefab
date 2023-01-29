@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4158320255322770770}
   - component: {fileID: 2303635855179885277}
+  - component: {fileID: -8954328618099846244}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: PlayersBullet
@@ -45,8 +46,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39de3153050b26849a1ffbdfd6738a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPos: {fileID: 2880840102072082631, guid: 88cfce8c7cd188742a5f0d4c79500b1c, type: 3}
   speed: 50
-  main: {fileID: 675060049387998378}
+--- !u!136 &-8954328618099846244
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675060049387998378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6000178162367444766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59,14 +74,6 @@ PrefabInstance:
       value: Capsule
       objectReference: {fileID: 0}
     - target: {fileID: 164830757567771351, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
-      propertyPath: m_TagString
-      value: PlayersBullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225265442771554197, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
-      propertyPath: m_TagString
-      value: PlayersBullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 2085949389855261006, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
       propertyPath: m_TagString
       value: PlayersBullet
       objectReference: {fileID: 0}
@@ -126,47 +133,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 879062919661969072, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
---- !u!1 &5840450241485407689 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 164830757567771351, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
-  m_PrefabInstance: {fileID: 6000178162367444766}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &6207851527037725880
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840450241485407689}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.6
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1818360608 &8996462801578670043
-PositionConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840450241485407689}
-  m_Enabled: 1
-  m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffset: {x: 0, y: 0, z: 0}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_IsContraintActive: 0
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1
 --- !u!4 &7291904462519395296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3924577317589505278, guid: 2714e31cdbeb70c48ad44e58fa2ccf4f, type: 3}
