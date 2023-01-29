@@ -21,14 +21,10 @@ public class blackhole : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-<<<<<<< Updated upstream
         if (other != null && !other.CompareTag("BlackHole") &&
             Vector3.Distance(other.transform.position, transform.position) > 50f)
-=======
-        if (!other.CompareTag("BlackHole")&&Vector3.Distance(other.transform.position, transform.position) > 50f)
->>>>>>> Stashed changes
         {
-            if (other.CompareTag("Enemy") || other.CompareTag("Schleim"))
+            if (other != null && (other.CompareTag("Enemy") || other.CompareTag("Schleim")))
             {
                 other.transform.position =
                     Vector3.Lerp(other.transform.position, transform.position, 0.05f * Time.deltaTime);
@@ -43,23 +39,12 @@ public class blackhole : MonoBehaviour
                 }
             }
 
-<<<<<<< Updated upstream
         }
         else if (other != null && other.CompareTag("Player"))
         {
 
         }
         else if (other != null && !other.CompareTag("BlackHole"))
-=======
-        }else if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(2);
-        }else if (other.CompareTag("Portal"))
-        {
-            return;
-        }
-        else if(other.CompareTag("BlackHole"))
->>>>>>> Stashed changes
         {
             other.GetComponent<Renderer>().enabled = false;
         }
