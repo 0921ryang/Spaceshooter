@@ -24,11 +24,18 @@ public class BlackHole : MonoBehaviour
     {
         if (other!=null&&!other.CompareTag("BlackHole")&&Vector3.Distance(other.transform.position, transform.position) > 50f)
         {
-            Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
-            if (otherRigidbody != null)
+            if (other != null && (other.CompareTag("Enemy") || other.CompareTag("Schleim")))
             {
-                Vector3 force = (transform.position - other.transform.position).normalized * speed*Time.deltaTime;
-               otherRigidbody.velocity+=force;
+                other.transform.position = Vector3.Lerp(other.transform.position, transform.position, 0.05f * Time.deltaTime);
+            }
+            else
+            {
+                Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+                if (otherRigidbody != null)
+                {
+                    Vector3 force = (transform.position - other.transform.position).normalized * speed*Time.deltaTime;
+                    otherRigidbody.velocity+=force;
+                }
             }
 
         }else if (other!=null&&other.CompareTag("Player"))
@@ -37,7 +44,7 @@ public class BlackHole : MonoBehaviour
         }
         else if(other!=null&&!other.CompareTag("BlackHole"))
         {
-            Destroy(other);
+            other.GetComponent<Renderer>().enabled = false;
         } 
     }
 

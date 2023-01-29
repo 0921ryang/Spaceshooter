@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4158320255322770770}
   - component: {fileID: 2303635855179885277}
-  - component: {fileID: 4749561564727264778}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: PlayersBullet
@@ -48,20 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   main: {fileID: 675060049387998378}
---- !u!136 &4749561564727264778
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675060049387998378}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.6
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6000178162367444766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157,7 +142,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5840450241485407689}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.6
   m_Height: 2

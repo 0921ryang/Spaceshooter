@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
@@ -5,7 +6,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
+using Image = UnityEngine.UI.Image;
 
 public class Player3D : MonoBehaviour
 {
@@ -27,6 +30,7 @@ public class Player3D : MonoBehaviour
     private Rigidbody rb;
     public static Vector3 trans;
     private static bool stop;
+    private static bool yRichtung;
 
     public enum State
     {
@@ -47,11 +51,13 @@ public class Player3D : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         trans = transform.position;
         stop = true;
+        yRichtung = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        trans = transform.position;
         //防止屏幕中途变换
         w=Screen.width/2.0f; 
         h=Screen.height/2.0f;
@@ -62,8 +68,8 @@ public class Player3D : MonoBehaviour
             Cursor.visible = false;
         }
         //三维旋转
-        x = Input.GetAxis("Mouse X");
-        y = Input.GetAxis("Mouse Y");
+        x = Input.GetAxis("Mouse X")*5f;
+        y = Input.GetAxis("Mouse Y")*5f;
         //transform.Rotate(new Vector3(-y,0,-x),Space.Self);
         if (x != 0 || y != 0)
         {
@@ -100,7 +106,7 @@ public class Player3D : MonoBehaviour
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -500, 500), transform.position.y,
                 transform.position.z);
             if (transform.position.x >= 499 || transform.position.x <= -499 || transform.position.z <= -499 ||
-                transform.position.z >= 499)
+                transform.position.z >= 499||yRichtung)
             {
                 Bounds.color=Color.red;
                 Bounds.gameObject.SetActive(true);
@@ -149,8 +155,10 @@ public class Player3D : MonoBehaviour
             SceneManager.LoadScene(2);
         }
     }
-    void OnTriggerEnter(Collider other)
+
+    public void OnCollisionEnter(Collision collision)
     {
+        Collider other = collision.collider;
         if ((other.CompareTag("Enemy")||other.CompareTag("Explosion"))&&playerState==State.Playing)
         {
             if(other.CompareTag("Enemy"))
@@ -160,14 +168,28 @@ public class Player3D : MonoBehaviour
             {
                 lives -= 3;
             }
-            Instantiate(explosionPrefab, transform.position, other.transform.rotation);
+            Instantiate(explosionPrefab, transform.position, other.transform.rotation).GetComponent<Effect>().sc=100;
             playerState = State.Explosion;
             StartCoroutine(destroy());
         }else if (other.CompareTag("Schleim"))
         {
             StartCoroutine(Slow());
+        }else if (other.CompareTag("BlackHole") && other.GetComponent<BoxCollider>() != null)
+        {
+            lives--;
+        }else if (other.CompareTag("Edge"))
+        {
+            yRichtung = true;
         }
-            
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        Collider other = collision.collider;
+        if (other.CompareTag("Edge"))
+        {
+            yRichtung = false;
+        }
     }
 
     private IEnumerator Slow()

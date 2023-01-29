@@ -17,8 +17,9 @@ public class Bullet : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
+        Collider other = collision.collider;
         if (other.CompareTag("Enemy"))
         {
             var collideWith = other.GetComponent<Enemy>();
