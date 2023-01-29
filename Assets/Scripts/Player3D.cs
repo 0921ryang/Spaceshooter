@@ -23,6 +23,18 @@ public class Player3D : MonoBehaviour
     public static int score=0;
     public TMPro.TMP_Text ScoreUI;
     public TMPro.TMP_Text Respawn;
+<<<<<<< Updated upstream
+=======
+    public TMPro.TMP_Text Bounds;
+    public TMPro.TMP_Text BossBattle;
+    private Rigidbody rb;
+    public static Vector3 trans;
+    private static bool stop;
+    private static bool yRichtung;
+    public GameObject zuBoss;
+    private bool flag = false;
+    
+>>>>>>> Stashed changes
 
     public enum State
     {
@@ -38,6 +50,17 @@ public class Player3D : MonoBehaviour
         screen = new Vector3(w, h, 0.0f);
         image.enabled = false;
         Respawn.gameObject.SetActive(false);
+<<<<<<< Updated upstream
+=======
+        Bounds.gameObject.SetActive(false);
+        BossBattle.gameObject.SetActive(false);
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        trans = transform.position;
+        stop = true;
+        yRichtung = false;
+        flag = false;
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -57,7 +80,21 @@ public class Player3D : MonoBehaviour
         y = Input.GetAxis("Mouse Y");
         transform.Rotate(new Vector3(-y,0,-x),Space.Self);
         //显示UI
-        ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
+        if (!flag)
+        {
+            ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
+        }
+        else if(SceneManager.GetActiveScene().name=="SampleScene")
+        {
+            ScoreUI.text = "Lives: " + lives + "\n";
+            BossBattle.gameObject.SetActive(true);
+        }
+        else
+        {
+            ScoreUI.text = "Lives: " + lives + "\n";
+            BossBattle.gameObject.SetActive(false);
+        }
+        
         
         if (playerState != State.Explosion)
         {
@@ -98,9 +135,10 @@ public class Player3D : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        if (score >= 200)
+        if (score >= 500&&!flag)
         {
-            SceneManager.LoadScene(3);
+            flag = true;
+            Instantiate(zuBoss, new Vector3(0, transform.position.y+100, 0), Quaternion.identity);
         }
         if (lives <= 0)
         {

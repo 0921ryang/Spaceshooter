@@ -10,6 +10,9 @@ TagManager:
   - Schleim
   - Explosion
   - Hindernis
+  - TrackingObject
+  - Actors
+  - Portal
   layers:
   - Default
   - TransparentFX
