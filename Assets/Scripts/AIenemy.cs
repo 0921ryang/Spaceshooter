@@ -41,6 +41,7 @@ public class AIenemy : MonoBehaviour
         { 
             case Art.DistanceKeep:
             {
+                Debug.Log(transform.position);
                 transform.Translate(moveSpeed*new Vector3(playerPosition.position.x-transform.position.x,
                     playerPosition.position.y-transform.position.y+8,
                     playerPosition.position.z-transform.position.z)*Time.deltaTime); 
@@ -48,7 +49,8 @@ public class AIenemy : MonoBehaviour
                 if (Time.time>nextFire)
                 {
                     nextFire = Time.time + fireRate;
-                    Instantiate(Bullet, transform.position, transform.rotation);
+                    Instantiate(Bullet, transform.position, transform.rotation).AddComponent<EnemyBullet>().main =
+                        gameObject;
                 }
                 //Fire in einer bestimmten Zeit. Man kann es durch die Veränderung von "fireRate" setzen
                 return;
@@ -66,7 +68,8 @@ public class AIenemy : MonoBehaviour
                 if (Time.time>nextFire)
                 {
                     nextFire = Time.time + fireRate;
-                    Instantiate(Bullet, transform.position, transform.rotation);
+                    Instantiate(Bullet, transform.position, transform.rotation).AddComponent<EnemyBullet>().main =
+                        gameObject;
                 }
                 //es bewegt immer im bestimmten Bereich(maxXPosition , minXPosition) und schießen
                 return;

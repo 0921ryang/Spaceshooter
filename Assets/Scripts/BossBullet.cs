@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class BossBullet : MonoBehaviour
 {
     public float speed = 10f;
     public GameObject main;
@@ -11,12 +12,21 @@ public class EnemyBullet : MonoBehaviour
     {
         
     }
+
     // Update is called once per frame
     void Update()
     {
         float amtToMove = speed * Time.deltaTime;
-        transform.Translate(Vector3.down*amtToMove,Space.Self);
+        transform.Translate(Vector3.forward*amtToMove,Space.Self);
         if (Vector3.Distance(main.transform.position, transform.position) > 150)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") || other.CompareTag("Hindernis"))
         {
             Destroy(gameObject);
         }

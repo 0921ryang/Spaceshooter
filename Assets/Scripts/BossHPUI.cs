@@ -29,6 +29,14 @@ public class BossHPUI : MonoBehaviour
         bossHPset.SetHP(currentHP);
     }
 
+    public void Heiling(int Zahl)
+    {
+        if (currentHP > 0 && currentHP <= maxHP)
+        {
+            currentHP += Zahl;
+        }
+        bossHPset.SetHP(currentHP);
+    }
     public int getCurrentHP()
     {
         return currentHP;

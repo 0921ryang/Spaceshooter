@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class BlackHole : MonoBehaviour
 {
-    public static float speed = 0.2f;
-    Coroutine moveCoroutine;
+    public float speed = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,31 +20,35 @@ public class BlackHole : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        moveCoroutine=StartCoroutine(MoveTowards(other));
+        if (other!=null&&!other.CompareTag("BlackHole")&&Vector3.Distance(other.transform.position, transform.position) > 50f)
+        {
+            if (other != null && (other.CompareTag("Enemy") || other.CompareTag("Schleim")))
+            {
+                other.transform.position = Vector3.Lerp(other.transform.position, transform.position, 0.05f * Time.deltaTime);
+            }
+            else
+            {
+                Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+                if (otherRigidbody != null)
+                {
+                    Vector3 force = (transform.position - other.transform.position).normalized * speed*Time.deltaTime;
+                    otherRigidbody.velocity+=force;
+                }
+            }
+
+        }else if (other!=null&&other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(2);
+        }
+        else if(other!=null&&!other.CompareTag("BlackHole"))
+        {
+            other.GetComponent<Renderer>().enabled = false;
+        } 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        StopCoroutine(moveCoroutine);
-    }
-
-    IEnumerator MoveTowards(Collider other)
-    {
-        while (other!=null&&Vector3.Distance(other.transform.position, transform.position) > 50f)
-        {
-            other.transform.position = Vector3.MoveTowards(other.transform.position, transform.position, speed );
-            yield return new WaitForEndOfFrame();
-        }
-
-        if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(2);
-        }
-        else
-        {
-            Destroy(other);
-        }
     }
 }

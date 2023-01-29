@@ -12,31 +12,40 @@ public class Boss : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject Bullet;
     public GameObject Effct; //explosion effect
-    public BossHPUI UI;
-    private bool hasShield;
+    public BossHPUI UI;// UI um aktuell HP zu zeigen
+    private bool hasShield;//prüfen, ob jetzt Boss Shield hat
+    private bool hasSatellit;
+    private float HeilenCD;
+    //hier ist Script für jeden Teil des Boss. Jeder Teil kann schießen, und wenn ein Teil des Boss von Player geschossen wird, nimmt HP ab
+    // Aber die besondere Fähigkeit hat ich in Script "BossMittelPoint" geschrieben. 
     void Start()
     {
-       
+        hasSatellit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(Point.transform.position, rotationAxis, MoveSpeed * Time.deltaTime);
-        //Way of attack
         currentTime += Time.deltaTime;
-        if (currentTime > fireTime)
+        if (currentTime > fireTime)//fireTime ist Frequenz des Angriff aus BOSS
         {
             Fire();
             currentTime = 0;
         }
+        transform.RotateAround(Point.transform.position, rotationAxis, MoveSpeed * Time.deltaTime);
+        HeilenCD += Time.deltaTime;
+        if (hasSatellit && HeilenCD>=1)
+        {
+            UI.Heiling(3);
+            HeilenCD = 0;
+        }
+        
     }
 
     private void Fire()
     {
-        GameObject prefabs = Instantiate(Bullet, transform.position, transform.rotation);
-        transform.rotation = Quaternion.LookRotation(player.transform.position - transform.position);
-        prefabs.transform.LookAt(player.transform.position);
+        transform.LookAt(player.transform.position);
+        Instantiate(Bullet, transform.position, transform.rotation).AddComponent<BossBullet>().main = gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,11 +53,23 @@ public class Boss : MonoBehaviour
         if (other.CompareTag("PlayersBullet") && !hasShield)
         {
             UI.ChangeHP(1);
+            if (UI.getCurrentHP() <= 0)
+            {
+                Instantiate(Effct, transform.position, transform.rotation);
+                Instantiate(Effct, transform.position, transform.rotation);
+                Instantiate(Effct, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
         }
     }
 
     public void SetShield(bool b)
     {
         hasShield = b;
+    }
+
+    public void SetSatellit(bool boolean)
+    {
+        hasSatellit = boolean;
     }
 }
