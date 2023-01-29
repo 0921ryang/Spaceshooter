@@ -11,6 +11,7 @@ TagManager:
   - Explosion
   - Edge
   - BlackHole
+  - Hindernis
   layers:
   - Default
   - TransparentFX
