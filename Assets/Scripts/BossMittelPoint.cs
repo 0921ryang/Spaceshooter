@@ -24,18 +24,24 @@ public class BossMittelPoint : MonoBehaviour
     private float Min;
     private float Max;
     private float Frequenz;
-    // Start is called before the first frame update
+    //Blackhole 
+    public GameObject BLACKHOLE;
+    private float BlackholeCD;
+    private int COUNT;
+    private int MoveSpeed = 10;
     void Start()
     {
         count = 0;
         Min = transform.position.x - 30;
         Max = transform.position.x + 30;
+        COUNT = 0;
 
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        transform.LookAt(player.transform.position);
         //Schild
         shieldCD += Time.deltaTime;
         if (shieldCD > 20)//jede 20 Sekunden benutzt Boss Schild
@@ -70,12 +76,21 @@ public class BossMittelPoint : MonoBehaviour
         }
         // zufällig Meteorit
         Frequenz += Time.deltaTime;
-        if (Frequenz > 0.1f)
+        if (Frequenz > 0.2f)
         {
             Instantiate(Meteorit, new Vector3(Random.Range(Min,Max),player.transform.position.y + 20, player.transform.position.z), transform.rotation);
             Frequenz = 0;
         }
-
+        //black Holes
+        BlackholeCD += Time.deltaTime;
+        if (BlackholeCD >= 3 && COUNT==0)
+        {
+            Instantiate(BLACKHOLE, transform.position + new Vector3(0, -3, 0), transform.rotation);
+            COUNT = 1;
+            BlackholeCD = 0;
+        }
+        
+        
     }
     private void OnDrawGizmos()
     {

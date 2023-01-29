@@ -6489,6 +6489,7 @@ MonoBehaviour:
   player: {fileID: 762139309}
   Satellit: {fileID: 4203365721258944786, guid: 36cd04765f24c584881f46670793c087, type: 3}
   Meteorit: {fileID: 5769665884573082087, guid: 141885a40a6838a4cbaa8ca4236a0e2e, type: 3}
+  BLACKHOLE: {fileID: 5140557870505500873, guid: c12a7b63f2357f74aa4751760cfa981d, type: 3}
 --- !u!114 &1771638747 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6375189035932754526, guid: 6bbe7c47a12f11f4c83b5dfa7c7de17a, type: 3}
