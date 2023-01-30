@@ -31,6 +31,7 @@ public class Player3D : MonoBehaviour
     private static bool yRichtung;
     public GameObject zuBoss;
     private bool flag = false;
+    private bool stop = false;
 
     public enum State
     {
@@ -69,9 +70,19 @@ public class Player3D : MonoBehaviour
             Cursor.visible = false;
         }
         //三维旋转
-        x = Input.GetAxis("Mouse X");
-        y = Input.GetAxis("Mouse Y");
-        transform.Rotate(new Vector3(-y,0,-x),Space.Self);
+        x = Input.GetAxis("Mouse X")*speed;
+        y = Input.GetAxis("Mouse Y")*speed;
+        if (x == 0 && y == 0&&!stop)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            stop = true;
+        }
+        else
+        {
+            stop = false;
+            rb.freezeRotation = false;
+            rb.AddRelativeTorque(new Vector3(-y,0,-x));
+        }
         //显示UI
         if (!flag)
         {
@@ -93,9 +104,16 @@ public class Player3D : MonoBehaviour
         {
             //移动
             float amtToMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-            rb.velocity += Vector3.up*amtToMove;
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-            rb.velocity += Vector3.up*vertical;
+            if (amtToMove == 0 && vertical == 0)
+            {
+                rb.velocity=Vector3.zero;
+            }
+            else
+            {
+                rb.velocity += transform.TransformDirection(Vector3.up) * vertical;
+                rb.velocity += transform.TransformDirection(Vector3.right) * amtToMove;
+            }
             transform.position = new Vector3(
                 Mathf.Clamp(transform.position.x, -500, 500),
                 transform.position.y,
@@ -114,7 +132,7 @@ public class Player3D : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(screen);
                 RaycastHit hit;
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
-                if (Physics.Raycast(ray, out hit)&&hit.transform.tag!="Player"&&hit.transform.tag!="PlayersBullet")
+                if (Physics.Raycast(ray, out hit)&&hit.transform.tag!="Player"&&hit.transform.tag!="PlayersBullet"&&hit.distance>10)
                 {
                     //这里是物体被击中后的代码
                     //hit.point是目标物体的位置
@@ -123,7 +141,8 @@ public class Player3D : MonoBehaviour
                         var direction = hit.point - transform.position;
                         var targetRotation = Quaternion.LookRotation(direction);
                         Debug.Log("扫描到对象");
-                        Instantiate(Bullet, transform.position, targetRotation);
+                        GameObject bullet = Instantiate(Bullet, transform.position, targetRotation);
+                        Physics.IgnoreCollision(bullet.transform.GetChild(0).GetComponent<Collider>(), GetComponent<Collider>());
                     }
                 }
                 else
@@ -131,7 +150,8 @@ public class Player3D : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         var q = Quaternion.LookRotation(ray.GetPoint(distance)- transform.position, transform.up);
-                        Instantiate(Bullet, transform.position, q);
+                        GameObject bullet =Instantiate(Bullet, transform.position, q);
+                        Physics.IgnoreCollision(bullet.transform.GetChild(0).GetComponent<Collider>(), GetComponent<Collider>());
                     }
                 }
                 

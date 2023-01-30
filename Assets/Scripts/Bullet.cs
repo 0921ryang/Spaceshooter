@@ -9,7 +9,6 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Collider>().isTrigger = true;
     }
 
     // Update is called once per frame
@@ -18,26 +17,20 @@ public class Bullet : MonoBehaviour
         
     }
     
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            GetComponent<Collider>().isTrigger = false;
-        }
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         Collider other = collision.collider;
-        var collideWith = other.GetComponent<Enemy>();
-        collideWith.maxSpeed += .2f;
-        collideWith.minSpeed += .2f;
-        Destroy(gameObject);
-        if (collideWith != null)
+        if (!other.CompareTag("Player"))
         {
-            //explosionPrefab;
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            Debug.Log("We hit: " + other.name);
+            var collideWith = other.GetComponent<Enemy>();
+            Destroy(gameObject);
+            if (collideWith != null)
+            {
+                collideWith.maxSpeed += .2f;
+                collideWith.minSpeed += .2f;
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                Debug.Log("We hit: " + other.name);
+            }
         }
     }
 }
