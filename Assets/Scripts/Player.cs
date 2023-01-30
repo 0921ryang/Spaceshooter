@@ -27,13 +27,18 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n"+ "Missing: "+miss+"\n";;
+        SetText();
+    }
+
+    void SetText()
+    {
+        ScoreUI.text = "Score: " + score + "\n" + "Lives: " + lives + "\n" + "Missing: " + miss + "\n";
     }
 
     // Update is called once per frame
     void Update()
     {
-        ScoreUI.text = ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n"+ "Missing: "+miss+"\n";;
+        SetText();
         //transform.Translate(Vector3.right * 0.01f);这个句子会添加一个一直往右的速度
         if (playerState != State.Explosion)
         {
