@@ -56,8 +56,13 @@ public class Player3D : MonoBehaviour
         x = Input.GetAxis("Mouse X");
         y = Input.GetAxis("Mouse Y");
         transform.Rotate(new Vector3(-y,0,-x),Space.Self);
+        
         //显示UI
-        ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
+        var livesText = "";
+        for (int i = 0; i < lives; i++)
+            livesText += "♥";
+
+        ScoreUI.text = "Score: " + score + "\n" + "Lives: " + livesText;
         
         if (playerState != State.Explosion)
         {
