@@ -24,11 +24,11 @@ public class Bullet : MonoBehaviour
         {
             var collideWith = other.GetComponent<Enemy>();
             Destroy(gameObject);
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             if (collideWith != null)
             {
                 collideWith.maxSpeed += .2f;
                 collideWith.minSpeed += .2f;
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
                 Debug.Log("We hit: " + other.name);
             }
         }
