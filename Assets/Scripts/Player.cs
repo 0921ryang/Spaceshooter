@@ -8,13 +8,13 @@ using UnityEngine.Serialization;
 public class Player : MonoBehaviour
 {
     public float speed = 8f;
-    
+
     public static int lives = 10;
     public static int miss = 0;
 
     public GameObject Bullet;
     public GameObject explosionPrefab;
-    public static int score=0;
+    public static int score = 0;
     public TMPro.TextMeshPro ScoreUI;
 
     public enum State
@@ -23,7 +23,9 @@ public class Player : MonoBehaviour
         Explosion,
         Invincible
     };
-    private State playerState=State.Playing;
+
+    private State playerState = State.Playing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,11 @@ public class Player : MonoBehaviour
 
     void SetText()
     {
-        ScoreUI.text = "Score: " + score + "\n" + "Lives: " + lives + "\n" + "Missing: " + miss + "\n";
+        var livesText = "";
+        for (int i = 0; i < lives; i++)
+            livesText += "♥";
+
+        ScoreUI.text = "Score: " + score + "\n" + "Lives: " + livesText + "\n" + "Missing: " + miss + "\n";
     }
 
     // Update is called once per frame
@@ -43,7 +49,7 @@ public class Player : MonoBehaviour
         if (playerState != State.Explosion)
         {
             float amtToMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-            transform.Translate(Vector3.right*amtToMove);
+            transform.Translate(Vector3.right * amtToMove);
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
             transform.Translate(Vector3.up * vertical);
             if (Input.GetKeyDown("space"))
@@ -51,24 +57,26 @@ public class Player : MonoBehaviour
                 Instantiate(Bullet, transform.position, Quaternion.identity);
             }
         }
+
         if (transform.position.x < -10f)
         {
             var transform1 = transform;
             var position = transform1.position;
-            position= new Vector3(10f, position.y, position.z);
+            position = new Vector3(10f, position.y, position.z);
             transform1.position = position;
         }
-        else if (transform.position.x>10f)
+        else if (transform.position.x > 10f)
         {
             transform.position = new Vector3(-10f, transform.position.y, transform.position.z);
-        }else if (transform.position.y > 5f)
+        }
+        else if (transform.position.y > 5f)
         {
             var transform1 = transform;
             var position = transform1.position;
             position = new Vector3(position.x, -5f, position.z);
             transform1.position = position;
         }
-        else if(transform.position.y<-5f)
+        else if (transform.position.y < -5f)
         {
             transform.position = new Vector3(transform.position.x, 5f, transform.position.z);
         }
@@ -77,18 +85,21 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+
         if (score >= 200)
         {
             SceneManager.LoadScene(3);
         }
+
         if (lives <= 0)
         {
             SceneManager.LoadScene(2);
         }
     }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy")&&playerState==State.Playing)
+        if (other.CompareTag("Enemy") && playerState == State.Playing)
         {
             Instantiate(explosionPrefab, transform.position, other.transform.rotation);
             playerState = State.Explosion;
@@ -104,15 +115,17 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
-        transform.position=new Vector3(0,-5,0);
-        
+
+        transform.position = new Vector3(0, -5, 0);
+
         StartCoroutine(blink());
-        while (transform.position.y<0)
+        while (transform.position.y < 0)
         {
             float vertical1 = speed * Time.deltaTime;
             transform.Translate(Vector3.up * vertical1);
             yield return null;
         }
+
         playerState = State.Invincible;
         yield return new WaitForSeconds(2);
         playerState = State.Playing;
@@ -120,7 +133,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator blink()
     {
-        while (playerState!=State.Playing)
+        while (playerState != State.Playing)
         {
             GetComponent<Renderer>().enabled = false;
             yield return new WaitForSeconds(0.2f);
