@@ -66,7 +66,7 @@ public class Player3D : MonoBehaviour
         for (int i = score; i > 0; i /= 2)
             scoreText += "◆";
 
-        ScoreUI.text = "Score: " + scoreText + "\n" + "Lives: " + livesText;
+        ScoreUI.text = scoreText + " " + livesText;
         
         if (playerState != State.Explosion)
         {
