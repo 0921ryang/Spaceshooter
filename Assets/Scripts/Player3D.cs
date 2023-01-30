@@ -61,8 +61,12 @@ public class Player3D : MonoBehaviour
         var livesText = "";
         for (int i = 0; i < lives; i++)
             livesText += "♥";
+        
+        var scoreText = "";
+        for (int i = score; i > 0; i /= 2)
+            scoreText += "◆";
 
-        ScoreUI.text = "Score: " + score + "\n" + "Lives: " + livesText;
+        ScoreUI.text = "Score: " + scoreText + "\n" + "Lives: " + livesText;
         
         if (playerState != State.Explosion)
         {
