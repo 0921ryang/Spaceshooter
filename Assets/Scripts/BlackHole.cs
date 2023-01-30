@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class blackhole : MonoBehaviour
+public class BlackHole : MonoBehaviour
 {
     public float speed = 3f;
     public int MoveSpeed;
@@ -42,7 +43,7 @@ public class blackhole : MonoBehaviour
         }
         else if (other != null && other.CompareTag("Player"))
         {
-
+            SceneManager.LoadScene(2);
         }
         else if (other != null && !other.CompareTag("BlackHole"))
         {

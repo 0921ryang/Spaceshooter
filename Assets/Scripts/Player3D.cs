@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 
 public class Player3D : MonoBehaviour
 {
-    public float speed = 8f;
+   public float speed = 8f;
     private float x;
     private float y;
     public static int lives = 10;
@@ -23,6 +24,13 @@ public class Player3D : MonoBehaviour
     public static int score=0;
     public TMPro.TMP_Text ScoreUI;
     public TMPro.TMP_Text Respawn;
+    public TMPro.TMP_Text Bounds;
+    public TMPro.TMP_Text BossBattle;
+    private Rigidbody rb;
+    public static Vector3 trans;
+    private static bool yRichtung;
+    public GameObject zuBoss;
+    private bool flag = false;
 
     public enum State
     {
@@ -38,11 +46,19 @@ public class Player3D : MonoBehaviour
         screen = new Vector3(w, h, 0.0f);
         image.enabled = false;
         Respawn.gameObject.SetActive(false);
+        Bounds.gameObject.SetActive(false);
+        BossBattle.gameObject.SetActive(false);
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        trans = transform.position;
+        yRichtung = false;
+        flag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        trans = transform.position;
         //防止屏幕中途变换
         w=Screen.width/2.0f; 
         h=Screen.height/2.0f;
@@ -57,16 +73,43 @@ public class Player3D : MonoBehaviour
         y = Input.GetAxis("Mouse Y");
         transform.Rotate(new Vector3(-y,0,-x),Space.Self);
         //显示UI
-        ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
+        if (!flag)
+        {
+            ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
+        }
+        else if(SceneManager.GetActiveScene().name=="SampleScene")
+        {
+            ScoreUI.text = "Lives: " + lives + "\n";
+            BossBattle.gameObject.SetActive(true);
+        }
+        else
+        {
+            ScoreUI.text = "Lives: " + lives + "\n";
+            BossBattle.gameObject.SetActive(false);
+        }
+        
         
         if (playerState != State.Explosion)
         {
             //移动
             float amtToMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-            transform.Translate(Vector3.right*amtToMove);
+            rb.velocity += Vector3.up*amtToMove;
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-            transform.Translate(Vector3.up * vertical);
-            
+            rb.velocity += Vector3.up*vertical;
+            transform.position = new Vector3(
+                Mathf.Clamp(transform.position.x, -500, 500),
+                transform.position.y,
+                Mathf.Clamp(transform.position.z, -500, 500)
+            );
+            if (transform.position.x < -499 || transform.position.x > 499 || transform.position.z < -499 ||
+                transform.position.z > 499 ||yRichtung)
+            {
+                Bounds.gameObject.SetActive(true);
+            }
+            else
+            {
+                Bounds.gameObject.SetActive(false);
+            }
                 //子弹跟随准星方向发出
                 Ray ray = Camera.main.ScreenPointToRay(screen);
                 RaycastHit hit;
@@ -98,17 +141,19 @@ public class Player3D : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        if (score >= 200)
+        if (score >= 500&&!flag)
         {
-            SceneManager.LoadScene(3);
+            flag = true;
+            Instantiate(zuBoss, new Vector3(0, transform.position.y+100, 0), Quaternion.identity);
         }
         if (lives <= 0)
         {
             SceneManager.LoadScene(2);
         }
     }
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
+        Collider other = collision.collider;
         if ((other.CompareTag("Enemy")||other.CompareTag("Explosion"))&&playerState==State.Playing)
         {
             if(other.CompareTag("Enemy"))
@@ -124,8 +169,22 @@ public class Player3D : MonoBehaviour
         }else if (other.CompareTag("Schleim"))
         {
             StartCoroutine(Slow());
+        }else if (other.CompareTag("Edge"))
+        {
+            Bounds.gameObject.SetActive(true);
+            yRichtung = true;
         }
             
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Collider other = collision.collider;
+        if (other.CompareTag("Edge"))
+        {
+            Bounds.gameObject.SetActive(false);
+            yRichtung = false;
+        }
     }
 
     private IEnumerator Slow()

@@ -10,6 +10,11 @@ TagManager:
   - Schleim
   - Explosion
   - Hindernis
+  - Laser
+  - TrackingObject
+  - Actors
+  - BlackHole
+  - Edge
   layers:
   - Default
   - TransparentFX
