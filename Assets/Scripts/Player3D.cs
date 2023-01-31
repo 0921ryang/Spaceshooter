@@ -34,6 +34,7 @@ public class Player3D : MonoBehaviour
     private bool stop ;
     private bool stop2 ;
     public static bool boom;
+    public static Ray ray;
 
     public enum State
     {
@@ -59,6 +60,7 @@ public class Player3D : MonoBehaviour
         stop = false;
         stop2 = false;
         boom = false;
+        ray = Camera.main.ScreenPointToRay(screen);
     }
 
     // Update is called once per frame
@@ -144,7 +146,7 @@ public class Player3D : MonoBehaviour
                 Bounds.gameObject.SetActive(false);
             }
                 //子弹跟随准星方向发出
-                Ray ray = Camera.main.ScreenPointToRay(screen);
+                ray = Camera.main.ScreenPointToRay(screen);
                 RaycastHit hit;
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
                 if (Physics.Raycast(ray, out hit)&&hit.transform.tag!="Player"&&hit.transform.tag!="PlayersBullet"&&hit.distance>10)

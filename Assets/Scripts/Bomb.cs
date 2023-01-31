@@ -76,6 +76,10 @@ public class Bomb : MonoBehaviour
         dir.y += Random.Range(-20, 20);
         dir.z += Random.Range(-20, 20);
         dir = (dir - transform.position).normalized;
+        if (Random.Range(0, 2) == 1)
+        {
+            dir = -Player3D.ray.direction;
+        }
         Debug.Log(transform.position);
         //transform.Translate(Random.Range(-4, 4f), 10, 0);
         
