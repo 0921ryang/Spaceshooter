@@ -916,6 +916,7 @@ MonoBehaviour:
   Bounds: {fileID: 585371632}
   BossBattle: {fileID: 1261601199}
   zuBoss: {fileID: 8566846207832248791, guid: 93f13ae786a6707489a950bcc8095df5, type: 3}
+  hinder: {fileID: 1557090935998059234, guid: 289aa704222bab04fba1db3c4a6e9fab, type: 3}
 --- !u!64 &762139312
 MeshCollider:
   m_ObjectHideFlags: 0
