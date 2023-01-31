@@ -48,8 +48,9 @@ public class AIenemy : MonoBehaviour
                 if (Time.time>nextFire)
                 {
                     nextFire = Time.time + fireRate;
-                    Instantiate(Bullet, transform.position, transform.rotation).AddComponent<EnemyBullet>().main =
+                    GameObject bu=Instantiate(Bullet, transform.position, transform.rotation).AddComponent<EnemyBullet>().main =
                         gameObject;
+                    Physics.IgnoreCollision(bu.GetComponent<Collider>(),GetComponent<Collider>());
                 }
                 //Fire in einer bestimmten Zeit. Man kann es durch die Veränderung von "fireRate" setzen
                 return;
@@ -79,8 +80,9 @@ public class AIenemy : MonoBehaviour
     
     public GameObject Effect;//Explosion Effect
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        Collider other = collision.collider;
         if (other.CompareTag("PlayersBullet"))
         {
             aiLives-=1;

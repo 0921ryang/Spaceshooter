@@ -24,8 +24,8 @@ public class Bomb : MonoBehaviour
         rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        maxScale.x = 5f;
-        maxScale.y = 20f;
+        maxScale.x = 1f;
+        maxScale.y = 10f;
         transform.Rotate(Time.deltaTime*rotationSpeed);
         scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;
