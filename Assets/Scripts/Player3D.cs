@@ -7,10 +7,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Player3D : MonoBehaviour
 {
-   public float speed = 8f;
+   public float speed = 15f;
     private float x;
     private float y;
     public static int lives = 10;
@@ -36,6 +37,10 @@ public class Player3D : MonoBehaviour
     public static bool boom;
     public static Ray ray;
     private static bool level;
+
+    private float distanceToRefresh = 100f;
+    private Vector3 lastPosition;
+    public GameObject hinder;
 
     public enum State
     {
@@ -63,11 +68,22 @@ public class Player3D : MonoBehaviour
         boom = false;
         ray = Camera.main.ScreenPointToRay(screen);
         level = false;
+        lastPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        float distanceMoved = transform.position.y - lastPosition.y;
+        if (distanceMoved >= distanceToRefresh&&SceneManager.GetActiveScene().name=="SampleScene") {
+            // Refresh the thing
+            for (int i = 0; i < 5; i++)
+            {
+                Instantiate(hinder, transform.position,Quaternion.identity);
+            }
+            lastPosition = transform.position;
+        }
+        
         trans = transform.position;
         //防止屏幕中途变换
         w=Screen.width/2.0f; 

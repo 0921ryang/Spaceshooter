@@ -42,6 +42,9 @@ public class BlackHole : MonoBehaviour
         else if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(2);
+        }else if (other.CompareTag("Hindernis"))
+        {
+            Destroy(other.gameObject);
         }
         else if (!other.CompareTag("BlackHole"))
         {

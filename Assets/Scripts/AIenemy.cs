@@ -41,11 +41,15 @@ public class AIenemy : MonoBehaviour
         { 
             case Art.DistanceKeep:
             {
+                if (aiLives > 0 && !GetComponent<MeshRenderer>().enabled)
+                {
+                    GetComponent<MeshRenderer>().enabled = true;
+                }
                 transform.Translate(moveSpeed*new Vector3(playerPosition.position.x-transform.position.x,
-                    playerPosition.position.y-transform.position.y+8,
+                    playerPosition.position.y-transform.position.y+20,
                     playerPosition.position.z-transform.position.z)*Time.deltaTime); 
                 //es liegt vor Player und folgt immer den Player und beleibt es immer in y-Achse  mit 8 Einheiten zu Player;
-                if (Time.time>nextFire)
+                if (Time.time>nextFire&&GetComponent<MeshRenderer>().enabled)
                 {
                     nextFire = Time.time + fireRate;
                     GameObject bu=Instantiate(Bullet, transform.position, transform.rotation).AddComponent<EnemyBullet>().main =
@@ -71,6 +75,13 @@ public class AIenemy : MonoBehaviour
                     Instantiate(Bullet, transform.position, transform.rotation).AddComponent<EnemyBullet>().main =
                         gameObject;
                 }
+
+                if (Vector3.Distance(Player3D.trans, transform.position) > 20)
+                {
+                    var vor = Player3D.trans;
+                    vor.y += 12;
+                    transform.Translate(vor*moveSpeed*Time.deltaTime);
+                }
                 //es bewegt immer im bestimmten Bereich(maxXPosition , minXPosition) und schießen
                 return;
             }
@@ -90,7 +101,17 @@ public class AIenemy : MonoBehaviour
         }
         if (aiLives <= 0)
         {
-            Destroy(gameObject);
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine(reborn());
         }
+    }
+
+    private IEnumerator reborn()
+    {
+        yield return new WaitForSeconds(10);
+        GetComponent<MeshRenderer>().enabled = true;
+        GetComponent<Collider>().enabled = true;
+        aiLives = 5;
     }
 }
