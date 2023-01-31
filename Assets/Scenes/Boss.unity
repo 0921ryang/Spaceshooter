@@ -4986,7 +4986,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &327325562
 BoxCollider:
@@ -4996,7 +4996,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327325557}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 18.211102, y: 18.996048, z: 41.875237}
@@ -5116,19 +5116,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.06
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.06
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.06
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.62
+      value: 5.014
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5427,15 +5427,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f05f7fdca41aabd41895e6a737ba4a8f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5864,7 +5864,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088903539}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 18.211098, y: 18.996048, z: 41.875225}
@@ -6756,7 +6756,6 @@ MonoBehaviour:
   player: {fileID: 762139309}
   Satellit: {fileID: 4203365721258944786, guid: 36cd04765f24c584881f46670793c087, type: 3}
   Meteorit: {fileID: 5769665884573082087, guid: 141885a40a6838a4cbaa8ca4236a0e2e, type: 3}
-  BLACKHOLE: {fileID: 5140557870505500873, guid: c12a7b63f2357f74aa4751760cfa981d, type: 3}
 --- !u!114 &1771638747 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6375189035932754526, guid: 6bbe7c47a12f11f4c83b5dfa7c7de17a, type: 3}
@@ -6802,7 +6801,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852076288}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 18.211098, y: 18.996048, z: 41.875225}

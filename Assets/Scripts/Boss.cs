@@ -48,8 +48,9 @@ public class Boss : MonoBehaviour
         Instantiate(Bullet, transform.position, transform.rotation).AddComponent<BossBullet>().main = gameObject;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        var other = collision.collider;
         if (other.CompareTag("PlayersBullet") && !hasShield)
         {
             UI.ChangeHP(1);

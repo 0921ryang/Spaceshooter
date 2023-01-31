@@ -24,8 +24,9 @@ public class BossBullet : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        var other = collision.collider;
         if (other.CompareTag("Player") || other.CompareTag("Hindernis"))
         {
             Destroy(gameObject);

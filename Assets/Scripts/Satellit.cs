@@ -23,13 +23,13 @@ public class Satellit : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        var other = collision.collider;
         if (other.CompareTag("PlayersBullet"))
         {
             lives -= 1;
             Instantiate(Effect,transform.position,transform.rotation);
         }
     }
-    
 }

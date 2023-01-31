@@ -25,16 +25,16 @@ public class BossMittelPoint : MonoBehaviour
     private float Max;
     private float Frequenz;
     //Blackhole 
-    public GameObject BLACKHOLE;
-    private float BlackholeCD;
-    private int COUNT;
-    private int MoveSpeed = 10;
+    //public GameObject BLACKHOLE;
+    //private float BlackholeCD;
+    //private int COUNT;
+    //private int MoveSpeed = 10;
     void Start()
     {
         count = 0;
         Min = transform.position.x - 30;
         Max = transform.position.x + 30;
-        COUNT = 0;
+        //COUNT = 0;
 
     }
 
@@ -82,13 +82,13 @@ public class BossMittelPoint : MonoBehaviour
             Frequenz = 0;
         }
         //black Holes
-        BlackholeCD += Time.deltaTime;
+        /*BlackholeCD += Time.deltaTime;
         if (BlackholeCD >= 3 && COUNT==0)
         {
             Instantiate(BLACKHOLE, transform.position + new Vector3(0, -3, 0), transform.rotation);
             COUNT = 1;
             BlackholeCD = 0;
-        }
+        }*/
         
         
     }

@@ -37,8 +37,9 @@ public class MeteoritBOSS : MonoBehaviour
         transform.Translate(- Vector3.up * amtToMove,Space.World);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        var other = collision.collider;
         if (other.CompareTag("Player") || other.CompareTag("PlayersBullet"))
         {
             Instantiate(Effect, transform.position, transform.rotation);
