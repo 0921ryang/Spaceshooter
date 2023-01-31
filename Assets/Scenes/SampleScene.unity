@@ -123,6 +123,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &5
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ded31f87ddb90241aa2412519f25138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  follow: {fileID: 2111545562}
+  delay: 10
+  pointer: 0
+  positions: []
+  rotations: []
+--- !u!81 &6
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
 --- !u!1001 &182124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19353,11 +19378,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b67a7599d801cf84ea25db591946ac79, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b14529ca926db74a82a313c52b8e17f, type: 3}
---- !u!20 &963194227 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 963194227, guid: 88cfce8c7cd188742a5f0d4c79500b1c, type: 3}
-  m_PrefabInstance: {fileID: 3115265119489954159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &978210567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30849,7 +30869,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 963194227}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 3
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -31653,6 +31673,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4477773289128684, guid: 81cdccb8fc1939947b9b7e9c5fc5f810, type: 3}
   m_PrefabInstance: {fileID: 2126608137}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2111545562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2880840102072082631, guid: 88cfce8c7cd188742a5f0d4c79500b1c, type: 3}
+  m_PrefabInstance: {fileID: 3115265119489954159}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2112622233 stripped
 Transform:

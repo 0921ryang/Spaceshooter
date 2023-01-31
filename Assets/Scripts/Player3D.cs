@@ -89,20 +89,24 @@ public class Player3D : MonoBehaviour
             rb.AddRelativeTorque(new Vector3(-y,0,-x));
         }
         //显示UI
+        var livesText = "";
+        for (int i = 0; i < lives; i++)
+            livesText += "♥";
+        
         if (!flag)
         {
-            ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
+            ScoreUI.text = "Score: "+score+"\n " + livesText;
         }
         else if(SceneManager.GetActiveScene().name=="SampleScene")
         {
-            ScoreUI.text = "Lives: " + lives + "\n";
+            ScoreUI.text = "Lives: " + livesText;
             Bounds.color=Color.yellow;
             BossBattle.text = "Go into the sun! There is the root of the problem!";
             BossBattle.gameObject.SetActive(true);
         }
         else
         {
-            ScoreUI.text = "Lives: " + lives + "\n";
+            ScoreUI.text = "Lives: " + livesText ;
             BossBattle.gameObject.SetActive(false);
         }
         
