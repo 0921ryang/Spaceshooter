@@ -30,8 +30,9 @@ public class Player3D : MonoBehaviour
     public static Vector3 trans;
     private static bool yRichtung;
     public GameObject zuBoss;
-    private bool flag = false;
-    private bool stop = false;
+    private bool flag ;
+    private bool stop ;
+    private bool stop2 ;
 
     public enum State
     {
@@ -54,6 +55,8 @@ public class Player3D : MonoBehaviour
         trans = transform.position;
         yRichtung = false;
         flag = false;
+        stop = false;
+        stop2 = false;
     }
 
     // Update is called once per frame
@@ -105,12 +108,14 @@ public class Player3D : MonoBehaviour
             //移动
             float amtToMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-            if (amtToMove == 0 && vertical == 0)
+            if (amtToMove == 0 && vertical == 0&&!stop2)
             {
                 rb.velocity=Vector3.zero;
+                stop2 = true;
             }
-            else
+            else if(!(amtToMove == 0 && vertical == 0))
             {
+                stop2 = false;
                 rb.velocity += transform.TransformDirection(Vector3.up) * vertical;
                 rb.velocity += transform.TransformDirection(Vector3.right) * amtToMove;
             }
@@ -122,10 +127,12 @@ public class Player3D : MonoBehaviour
             if (transform.position.x < -499 || transform.position.x > 499 || transform.position.z < -499 ||
                 transform.position.z > 499 ||yRichtung)
             {
+                Bounds.color=Color.red;
                 Bounds.gameObject.SetActive(true);
             }
             else
             {
+                Bounds.color=Color.red;
                 Bounds.gameObject.SetActive(false);
             }
                 //子弹跟随准星方向发出
@@ -194,7 +201,6 @@ public class Player3D : MonoBehaviour
             Bounds.gameObject.SetActive(true);
             yRichtung = true;
         }
-            
     }
 
     private void OnCollisionExit(Collision collision)

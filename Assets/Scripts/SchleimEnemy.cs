@@ -6,8 +6,8 @@ public class SchleimEnemy : MonoBehaviour
 {
        private float _speed;
     public GameObject Effect;
-    [SerializeField] public float minSpeed = 30f;
-    [SerializeField] public float maxSpeed = 50f;
+    [SerializeField] public float minSpeed = 20f;
+    [SerializeField] public float maxSpeed = 40f;
 
     private float maxRotationSpeed = 100f;
     private Vector3 rotationSpeed;
@@ -23,7 +23,7 @@ public class SchleimEnemy : MonoBehaviour
         rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         maxScale.x = 5f;
-        maxScale.y = 20f;
+        maxScale.y = 10f;
         transform.Rotate(Time.deltaTime*rotationSpeed);
         scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;
