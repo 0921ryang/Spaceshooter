@@ -19,9 +19,9 @@ public class Hindernis : MonoBehaviour
     void SetSpeedAndPosition()
     {
         var po = Player3D.trans;
-        po.x += Random.Range(-50f, 50f);
+        po.x += Random.Range(-100f, 100f);
         po.y += Random.Range(20f,50f);
-        po.z += Random.Range(-50f, 50f);
+        po.z += Random.Range(-100, 100f);
         int i = 10;
         var si = GetComponent<SphereCollider>().bounds.extents.magnitude/2;
         while ((po.x<-500||po.x>500||po.z>500||po.z<-500)&&i>0&&Physics.CheckSphere(po, si))

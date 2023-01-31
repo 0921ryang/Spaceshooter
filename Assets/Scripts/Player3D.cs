@@ -29,7 +29,6 @@ public class Player3D : MonoBehaviour
     public TMPro.TMP_Text BossBattle;
     private Rigidbody rb;
     public static Vector3 trans;
-    private static bool yRichtung;
     public GameObject zuBoss;
     private bool flag ;
     private bool stop ;
@@ -61,7 +60,6 @@ public class Player3D : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         trans = transform.position;
-        yRichtung = false;
         flag = false;
         stop = false;
         stop2 = false;
@@ -148,12 +146,12 @@ public class Player3D : MonoBehaviour
                 rb.velocity += transform.TransformDirection(Vector3.right) * amtToMove;
             }
             transform.position = new Vector3(
-                Mathf.Clamp(transform.position.x, -500, 500),
-                transform.position.y,
-                Mathf.Clamp(transform.position.z, -500, 500)
+                Mathf.Clamp(transform.position.x, -300, 300),
+                Mathf.Clamp(transform.position.y, -25, 700),
+                Mathf.Clamp(transform.position.z, -300, 300)
             );
-            if (transform.position.x < -499 || transform.position.x > 499 || transform.position.z < -499 ||
-                transform.position.z > 499 ||yRichtung)
+            if (transform.position.x < -299 || transform.position.x > 299 || transform.position.z < -299 ||
+                transform.position.z > 299 ||transform.position.y<-24||transform.position.y>699)
             {
                 Bounds.color=Color.red;
                 Bounds.gameObject.SetActive(true);
@@ -243,7 +241,6 @@ public class Player3D : MonoBehaviour
         }else if (other.CompareTag("Edge"))
         {
             Bounds.gameObject.SetActive(true);
-            yRichtung = true;
         }
     }
 
@@ -253,7 +250,6 @@ public class Player3D : MonoBehaviour
         if (other.CompareTag("Edge"))
         {
             Bounds.gameObject.SetActive(false);
-            yRichtung = false;
         }
     }
 
