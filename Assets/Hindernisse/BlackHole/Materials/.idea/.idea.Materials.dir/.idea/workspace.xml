@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="617b1bc4-42bd-4d16-b89a-3a01f443a216" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/BlackHoleSphere.mat" beforeDir="false" afterPath="$PROJECT_DIR$/BlackHoleSphere.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prefabs/AsteroidSystem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/AsteroidSystem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ObjecPrrefabs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ObjecPrrefabs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ObjecPrrefabs/BlackHoleSphere Variant.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ObjecPrrefabs/BlackHoleSphere Variant.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scenes/Boss.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scenes/Boss.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/AIenemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/AIenemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/BlackHole.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/BlackHole.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/Bomb.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/Bomb.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/Bullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/Effect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/Effect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/Player3D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/Player3D.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scripts/SchleimEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scripts/SchleimEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Text/Bounds.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Text/Text (TMP).prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Text/Bounds.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Text/Text (TMP).prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Text/Text (TMP) 1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Text/Text (TMP) 1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Blow Distance.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Blow Distance.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Blow shield.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Blow shield.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Blow.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Blow.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Cannon Blow.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Cannon Blow.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Shot (turret).wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Blows/Shot (turret).wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks/Button 2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks/Button 2.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks/Button 3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks/Button 3.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks/Button 4.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks/Button 4.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks/Button.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Menu Clicks/Button.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Music.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Music/Battle Music.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Music/Battle Music.mp3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Music/Universe Music.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Music/Universe Music.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Missile launch detected (Voice).wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Missile launch detected (Voice).wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Spaceship Engine 2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Spaceship Engine 2.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Spaceship Engine 3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Spaceship Engine 3.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Spaceship Engine Light.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Spaceship Engine Light.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Spaceship Engine.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Spaceship Engine.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Target acquired (Voice).wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Target acquired (Voice).wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Teleportation Jump.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Universe Sounds Free Pack/Various Sounds/Teleportation Jump.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ambitious music.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ambitious music/The Invasion.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ambitious music/The Invasion.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../capsule/GameObject.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../capsule/GameObject.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Magellan.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Magellan.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/MagellanSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/MagellanSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/aluminum1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/aluminum1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/dish_AO_01.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/dish_AO_01.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/magelan_map1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/magelan_map1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/magelan_solar.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/magelan_solar.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/skybox_earth.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/skybox_earth.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures/magelan_map1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures/magelan_map1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures/magelan_solar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures/magelan_solar.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures/magelan_solar_metal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures/magelan_solar_metal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures/maggelan_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/Materials/textures/maggelan_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/maggellan_ex.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/maggellan_ex.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/mesh/maggellan_ex.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../magellan/mesh/maggellan_ex.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Demo.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Demo.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials/sputnik_01.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials/sputnik_01.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials/sputnik_01_AlbedoTransparency.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials/sputnik_01_AlbedoTransparency.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials/sputnik_02.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials/sputnik_02.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials/sputnik_02_AlbedoTransparency.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Materials/sputnik_02_AlbedoTransparency.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Meshes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Meshes/Sputnik_1.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Meshes/Sputnik_1.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Prefabs/Sputnik_1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Prefabs/Sputnik_1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_01_AO.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_01_AO.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_01_AlbedoTransparency.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_01_AlbedoTransparency.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_01_MetallicSmoothness.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_01_MetallicSmoothness.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_01_Normal.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_01_Normal.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_02_AO.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_02_AO.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_02_AlbedoTransparency.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_02_AlbedoTransparency.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_02_MetallicSmoothness.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_02_MetallicSmoothness.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_02_Normal.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../project/Sputnik_1/Textures/sputnik_02_Normal.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../skybox_earth.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../skybox_earth.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../ProjectSettings/TagManager.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2L0ikywa5wWigCH5OkX7CAJAsUz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="617b1bc4-42bd-4d16-b89a-3a01f443a216" name="Changes" comment="" />
+      <created>1675014551067</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675014551067</updated>
+      <workItem from="1675014558942" duration="14000" />
+      <workItem from="1675014659311" duration="58000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
