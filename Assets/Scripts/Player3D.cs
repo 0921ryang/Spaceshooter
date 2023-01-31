@@ -145,11 +145,15 @@ public class Player3D : MonoBehaviour
                 rb.velocity += transform.TransformDirection(Vector3.up) * vertical;
                 rb.velocity += transform.TransformDirection(Vector3.right) * amtToMove;
             }
-            transform.position = new Vector3(
-                Mathf.Clamp(transform.position.x, -300, 300),
-                Mathf.Clamp(transform.position.y, -25, 700),
-                Mathf.Clamp(transform.position.z, -300, 300)
-            );
+
+            if (score < 800)
+            {
+                transform.position = new Vector3(
+                    Mathf.Clamp(transform.position.x, -300, 300),
+                    Mathf.Clamp(transform.position.y, -25, 700),
+                    Mathf.Clamp(transform.position.z, -300, 300)
+                );
+            }
             if (transform.position.x < -299 || transform.position.x > 299 || transform.position.z < -299 ||
                 transform.position.z > 299 ||transform.position.y<-24||transform.position.y>699)
             {
