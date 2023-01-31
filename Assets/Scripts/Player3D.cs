@@ -35,6 +35,7 @@ public class Player3D : MonoBehaviour
     private bool stop2 ;
     public static bool boom;
     public static Ray ray;
+    private static bool level;
 
     public enum State
     {
@@ -61,6 +62,7 @@ public class Player3D : MonoBehaviour
         stop2 = false;
         boom = false;
         ray = Camera.main.ScreenPointToRay(screen);
+        level = false;
     }
 
     // Update is called once per frame
@@ -188,10 +190,11 @@ public class Player3D : MonoBehaviour
             SceneManager.LoadScene(2);
         }
 
-        if (score == 200)
+        if (score == 200&&!level)
         {
             StartCoroutine(bombUndestroyable());
             boom = true;
+            level = true;
         }
     }
 
