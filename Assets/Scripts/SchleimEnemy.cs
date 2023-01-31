@@ -23,7 +23,7 @@ public class SchleimEnemy : MonoBehaviour
         rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         maxScale.x = 5f;
-        maxScale.y = 10f;
+        maxScale.y = 20f;
         transform.Rotate(Time.deltaTime*rotationSpeed);
         scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;
@@ -54,13 +54,13 @@ public class SchleimEnemy : MonoBehaviour
     {
         _speed = Random.Range(minSpeed, maxSpeed);
         var po =
-            Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.7f), Random.Range(0.3f, 0.7f), 100f));
+            Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.7f), Random.Range(0.3f, 0.7f), 50f));
         int i = 10;
         var si = GetComponent<CapsuleCollider>().bounds.extents.magnitude/2;
         while ((po.x<-500||po.x>500||po.z>500||po.z<-500)&&i>0&&Physics.CheckSphere(po, si))
         {
             i--;
-            po=Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), 100f));
+            po=Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), 50f));
         }
 
         if (i == 0)

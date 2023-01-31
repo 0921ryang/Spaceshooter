@@ -26,8 +26,8 @@ public class Enemy : MonoBehaviour {
         rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        maxScale.x = 10f;
-        maxScale.y = 30f;
+        maxScale.x = 30f;
+        maxScale.y = 80f;
         transform.Rotate(Time.deltaTime*rotationSpeed);
         scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;

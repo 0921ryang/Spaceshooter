@@ -84,18 +84,21 @@ public class Bomb : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Collider other = collision.collider;
-        rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        scale = Random.Range(maxScale.x, maxScale.y);
-        transform.localScale = Vector3.one * scale;
-        Instantiate(Effect, transform.position, Quaternion.identity);
-        SetSpeedAndPosition();
-        if (other.CompareTag("Player") || other.CompareTag("PlayersBullet"))
+        if (!Player3D.boom||Player3D.boom&&!other.CompareTag("Player")&&!other.CompareTag("PlayersBullet"))
         {
-            Player3D.score += 30;
-            Debug.Log("You have score"+Player3D.score);
-            Debug.Log(other.name);
+            rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+            rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+            rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+            scale = Random.Range(maxScale.x, maxScale.y);
+            transform.localScale = Vector3.one * scale;
+            Instantiate(Effect, transform.position, Quaternion.identity);
+            SetSpeedAndPosition();
+            if (other.CompareTag("Player") || other.CompareTag("PlayersBullet"))
+            {
+                Player3D.score += 30;
+                Debug.Log("You have score"+Player3D.score);
+                Debug.Log(other.name);
+            }
         }
     }
 }

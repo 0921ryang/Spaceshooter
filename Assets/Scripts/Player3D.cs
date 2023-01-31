@@ -33,6 +33,7 @@ public class Player3D : MonoBehaviour
     private bool flag ;
     private bool stop ;
     private bool stop2 ;
+    public static bool boom;
 
     public enum State
     {
@@ -57,6 +58,7 @@ public class Player3D : MonoBehaviour
         flag = false;
         stop = false;
         stop2 = false;
+        boom = false;
     }
 
     // Update is called once per frame
@@ -94,6 +96,8 @@ public class Player3D : MonoBehaviour
         else if(SceneManager.GetActiveScene().name=="SampleScene")
         {
             ScoreUI.text = "Lives: " + lives + "\n";
+            Bounds.color=Color.yellow;
+            BossBattle.text = "Go into the sun! There is the root of the problem!";
             BossBattle.gameObject.SetActive(true);
         }
         else
@@ -168,7 +172,7 @@ public class Player3D : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        if (score >= 500&&!flag)
+        if (score >= 800&&!flag)
         {
             flag = true;
             Instantiate(zuBoss, new Vector3(0, transform.position.y+100, 0), Quaternion.identity);
@@ -177,6 +181,21 @@ public class Player3D : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         }
+
+        if (score == 200)
+        {
+            StartCoroutine(bombUndestroyable());
+            boom = true;
+        }
+    }
+
+    private IEnumerator bombUndestroyable()
+    {
+        Bounds.color=Color.red;
+        BossBattle.text = "The bomb become indestructible!";
+        BossBattle.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+        BossBattle.gameObject.SetActive(false);
     }
     void OnCollisionEnter(Collision collision)
     {
