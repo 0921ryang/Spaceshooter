@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
@@ -60,6 +61,7 @@ public class Boss : MonoBehaviour
                 Instantiate(Effct, transform.position, transform.rotation);
                 Instantiate(Effct, transform.position, transform.rotation);
                 Destroy(gameObject);
+                SceneManager.LoadScene(3);
             }
         }
     }
