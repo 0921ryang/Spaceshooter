@@ -91,19 +91,11 @@ public class Player3D : MonoBehaviour
         //显示UI
         if (!flag)
         {
-            var livesText = "";
-            for (int i = 0; i < lives; i++)
-                livesText += "♥";
-            
-            ScoreUI.text = "Score: "+score+"\n"+"Lives: " + livesText +"\n";
+            ScoreUI.text = "Score: "+score+"\n"+"Lives: " + lives +"\n";
         }
         else if(SceneManager.GetActiveScene().name=="SampleScene")
         {
-            var livesText = "";
-            for (int i = 0; i < lives; i++)
-                livesText += "♥";
-            
-            ScoreUI.text = livesText;
+            ScoreUI.text = "Lives: " + lives + "\n";
             Bounds.color=Color.yellow;
             BossBattle.text = "Go into the sun! There is the root of the problem!";
             BossBattle.gameObject.SetActive(true);
@@ -114,20 +106,6 @@ public class Player3D : MonoBehaviour
             BossBattle.gameObject.SetActive(false);
         }
         
-        // x = Input.GetAxis("Mouse X");
-        // y = Input.GetAxis("Mouse Y");
-        // transform.Rotate(new Vector3(-y,0,-x),Space.Self);
-        //
-        // //显示UI
-        // var livesText = "";
-        // for (int i = 0; i < lives; i++)
-        //     livesText += "♥";
-        //
-        // var scoreText = "";
-        // for (int i = score; i > 0; i /= 2)
-        //     scoreText += "◆";
-        //
-        // ScoreUI.text = scoreText + " " + livesText;
         
         if (playerState != State.Explosion)
         {
