@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class BlackHole : MonoBehaviour
+public class blackhole : MonoBehaviour
 {
     public float speed = 3f;
+    public int MoveSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +15,8 @@ public class BlackHole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float amtToMove = MoveSpeed * Time.deltaTime;
+        transform.Translate(Vector3.forward*amtToMove,Space.Self);
     }
 
     private void OnTriggerStay(Collider other)
@@ -23,7 +24,7 @@ public class BlackHole : MonoBehaviour
         if (other != null && !other.CompareTag("BlackHole") &&
             Vector3.Distance(other.transform.position, transform.position) > 50f)
         {
-            if (other.CompareTag("Enemy") || other.CompareTag("Schleim")||other.CompareTag("Explosion"))
+            if (other != null && (other.CompareTag("Enemy") || other.CompareTag("Schleim")))
             {
                 other.transform.position =
                     Vector3.Lerp(other.transform.position, transform.position, 0.05f * Time.deltaTime);
@@ -39,11 +40,11 @@ public class BlackHole : MonoBehaviour
             }
 
         }
-        else if (other.CompareTag("Player"))
+        else if (other != null && other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(2);
+
         }
-        else if (!other.CompareTag("BlackHole"))
+        else if (other != null && !other.CompareTag("BlackHole"))
         {
             other.GetComponent<Renderer>().enabled = false;
         }

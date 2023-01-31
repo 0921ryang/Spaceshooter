@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
@@ -10,7 +9,7 @@ using UnityEngine.UI;
 
 public class Player3D : MonoBehaviour
 {
-   public float speed = 8f;
+    public float speed = 8f;
     private float x;
     private float y;
     public static int lives = 10;
@@ -24,16 +23,6 @@ public class Player3D : MonoBehaviour
     public static int score=0;
     public TMPro.TMP_Text ScoreUI;
     public TMPro.TMP_Text Respawn;
-    public TMPro.TMP_Text Bounds;
-    public TMPro.TMP_Text BossBattle;
-    private Rigidbody rb;
-    public static Vector3 trans;
-    private static bool yRichtung;
-    public GameObject zuBoss;
-    private bool flag ;
-    private bool stop ;
-    private bool stop2 ;
-    public static bool boom;
 
     public enum State
     {
@@ -49,22 +38,11 @@ public class Player3D : MonoBehaviour
         screen = new Vector3(w, h, 0.0f);
         image.enabled = false;
         Respawn.gameObject.SetActive(false);
-        Bounds.gameObject.SetActive(false);
-        BossBattle.gameObject.SetActive(false);
-        rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
-        trans = transform.position;
-        yRichtung = false;
-        flag = false;
-        stop = false;
-        stop2 = false;
-        boom = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        trans = transform.position;
         //防止屏幕中途变换
         w=Screen.width/2.0f; 
         h=Screen.height/2.0f;
@@ -75,97 +53,34 @@ public class Player3D : MonoBehaviour
             Cursor.visible = false;
         }
         //三维旋转
-        x = Input.GetAxis("Mouse X")*speed;
-        y = Input.GetAxis("Mouse Y")*speed;
-        if (x == 0 && y == 0&&!stop)
-        {
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
-            stop = true;
-        }
-        else
-        {
-            stop = false;
-            rb.freezeRotation = false;
-            rb.AddRelativeTorque(new Vector3(-y,0,-x));
-        }
-        //显示UI
-        if (!flag)
-        {
-            var livesText = "";
-            for (int i = 0; i < lives; i++)
-                livesText += "♥";
-            
-            ScoreUI.text = "Score: "+score+"\n"+"Lives: " + livesText +"\n";
-        }
-        else if(SceneManager.GetActiveScene().name=="SampleScene")
-        {
-            var livesText = "";
-            for (int i = 0; i < lives; i++)
-                livesText += "♥";
-            
-            ScoreUI.text = livesText;
-            Bounds.color=Color.yellow;
-            BossBattle.text = "Go into the sun! There is the root of the problem!";
-            BossBattle.gameObject.SetActive(true);
-        }
-        else
-        {
-            ScoreUI.text = "Lives: " + lives + "\n";
-            BossBattle.gameObject.SetActive(false);
-        }
+        x = Input.GetAxis("Mouse X");
+        y = Input.GetAxis("Mouse Y");
+        transform.Rotate(new Vector3(-y,0,-x),Space.Self);
         
-        // x = Input.GetAxis("Mouse X");
-        // y = Input.GetAxis("Mouse Y");
-        // transform.Rotate(new Vector3(-y,0,-x),Space.Self);
-        //
-        // //显示UI
-        // var livesText = "";
-        // for (int i = 0; i < lives; i++)
-        //     livesText += "♥";
-        //
-        // var scoreText = "";
-        // for (int i = score; i > 0; i /= 2)
-        //     scoreText += "◆";
-        //
-        // ScoreUI.text = scoreText + " " + livesText;
+        //显示UI
+        var livesText = "";
+        for (int i = 0; i < lives; i++)
+            livesText += "♥";
+        
+        var scoreText = "";
+        for (int i = score; i > 0; i /= 2)
+            scoreText += "◆";
+
+        ScoreUI.text = scoreText + " " + livesText;
         
         if (playerState != State.Explosion)
         {
             //移动
             float amtToMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+            transform.Translate(Vector3.right*amtToMove);
             float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-            if (amtToMove == 0 && vertical == 0&&!stop2)
-            {
-                rb.velocity=Vector3.zero;
-                stop2 = true;
-            }
-            else if(!(amtToMove == 0 && vertical == 0))
-            {
-                stop2 = false;
-                rb.velocity += transform.TransformDirection(Vector3.up) * vertical;
-                rb.velocity += transform.TransformDirection(Vector3.right) * amtToMove;
-            }
-            transform.position = new Vector3(
-                Mathf.Clamp(transform.position.x, -500, 500),
-                transform.position.y,
-                Mathf.Clamp(transform.position.z, -500, 500)
-            );
-            if (transform.position.x < -499 || transform.position.x > 499 || transform.position.z < -499 ||
-                transform.position.z > 499 ||yRichtung)
-            {
-                Bounds.color=Color.red;
-                Bounds.gameObject.SetActive(true);
-            }
-            else
-            {
-                Bounds.color=Color.red;
-                Bounds.gameObject.SetActive(false);
-            }
+            transform.Translate(Vector3.up * vertical);
+            
                 //子弹跟随准星方向发出
                 Ray ray = Camera.main.ScreenPointToRay(screen);
                 RaycastHit hit;
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
-                if (Physics.Raycast(ray, out hit)&&hit.transform.tag!="Player"&&hit.transform.tag!="PlayersBullet"&&hit.distance>10)
+                if (Physics.Raycast(ray, out hit)&&hit.transform.tag!="Player"&&hit.transform.tag!="PlayersBullet")
                 {
                     //这里是物体被击中后的代码
                     //hit.point是目标物体的位置
@@ -174,8 +89,7 @@ public class Player3D : MonoBehaviour
                         var direction = hit.point - transform.position;
                         var targetRotation = Quaternion.LookRotation(direction);
                         Debug.Log("扫描到对象");
-                        GameObject bullet = Instantiate(Bullet, transform.position, targetRotation);
-                        Physics.IgnoreCollision(bullet.transform.GetChild(0).GetComponent<Collider>(), GetComponent<Collider>());
+                        Instantiate(Bullet, transform.position, targetRotation);
                     }
                 }
                 else
@@ -183,8 +97,7 @@ public class Player3D : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         var q = Quaternion.LookRotation(ray.GetPoint(distance)- transform.position, transform.up);
-                        GameObject bullet =Instantiate(Bullet, transform.position, q);
-                        Physics.IgnoreCollision(bullet.transform.GetChild(0).GetComponent<Collider>(), GetComponent<Collider>());
+                        Instantiate(Bullet, transform.position, q);
                     }
                 }
                 
@@ -194,34 +107,17 @@ public class Player3D : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        if (score >= 800&&!flag)
+        if (score >= 200)
         {
-            flag = true;
-            Instantiate(zuBoss, new Vector3(0, transform.position.y+100, 0), Quaternion.identity);
+            SceneManager.LoadScene(3);
         }
         if (lives <= 0)
         {
             SceneManager.LoadScene(2);
         }
-
-        if (score == 200)
-        {
-            StartCoroutine(bombUndestroyable());
-            boom = true;
-        }
     }
-
-    private IEnumerator bombUndestroyable()
+    void OnTriggerEnter(Collider other)
     {
-        Bounds.color=Color.red;
-        BossBattle.text = "The bomb become indestructible!";
-        BossBattle.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3);
-        BossBattle.gameObject.SetActive(false);
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-        Collider other = collision.collider;
         if ((other.CompareTag("Enemy")||other.CompareTag("Explosion"))&&playerState==State.Playing)
         {
             if(other.CompareTag("Enemy"))
@@ -237,21 +133,8 @@ public class Player3D : MonoBehaviour
         }else if (other.CompareTag("Schleim"))
         {
             StartCoroutine(Slow());
-        }else if (other.CompareTag("Edge"))
-        {
-            Bounds.gameObject.SetActive(true);
-            yRichtung = true;
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        Collider other = collision.collider;
-        if (other.CompareTag("Edge"))
-        {
-            Bounds.gameObject.SetActive(false);
-            yRichtung = false;
-        }
+            
     }
 
     private IEnumerator Slow()
