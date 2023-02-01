@@ -51,7 +51,7 @@ public class Hindernis : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Hindernis[] myScripts = GameObject.FindObjectsOfType<Hindernis>();
-        if (other.CompareTag("Player")&&myScripts.Length!=0)
+        if ((other.CompareTag("Player")||other.CompareTag("PlayersBullet")||other.CompareTag("EnemyBullet"))&&myScripts.Length!=0)
         {
             other.transform.position = myScripts[Random.Range(0,myScripts.Length)].transform.position;
         }
