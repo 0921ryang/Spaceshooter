@@ -29,6 +29,7 @@ public class Player3D : MonoBehaviour
     public TMPro.TMP_Text BossBattle;
     private Rigidbody rb;
     public static Vector3 trans;
+    public static Vector3 velocity;
     public GameObject zuBoss;
     private bool flag ;
     private bool stop ;
@@ -60,6 +61,7 @@ public class Player3D : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         trans = transform.position;
+        velocity = rb.velocity;
         flag = false;
         stop = false;
         stop2 = false;
@@ -83,6 +85,7 @@ public class Player3D : MonoBehaviour
         }
         
         trans = transform.position;
+        velocity = rb.velocity;
         //防止屏幕中途变换
         w=Screen.width/2.0f; 
         h=Screen.height/2.0f;
@@ -208,7 +211,7 @@ public class Player3D : MonoBehaviour
             SceneManager.LoadScene(2);
         }
 
-        if (score == 200&&!level)
+        if (score >= 400&&!level)
         {
             StartCoroutine(bombUndestroyable());
             boom = true;
@@ -234,7 +237,7 @@ public class Player3D : MonoBehaviour
                 lives--;
             }else
             {
-                lives -= 3;
+                lives --;
             }
             Instantiate(explosionPrefab, transform.position, other.transform.rotation);
             playerState = State.Explosion;

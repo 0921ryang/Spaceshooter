@@ -29,18 +29,18 @@ public class Bullet : MonoBehaviour
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             if (collideWith != null)
             {
-                collideWith.maxSpeed += 9f;
-                collideWith.minSpeed += 9f;
+                collideWith.maxSpeed += 7f;
+                collideWith.minSpeed += 7f;
             }
             if (collideWith1 != null)
             {
-                collideWith.maxSpeed += 20f;
-                collideWith.minSpeed += 20f;
+                collideWith.maxSpeed += 10f;
+                collideWith.minSpeed += 10f;
             }
             if (collideWith2 != null)
             {
-                collideWith.maxSpeed += 12f;
-                collideWith.minSpeed += 12f;
+                collideWith.maxSpeed += 5f;
+                collideWith.minSpeed += 5f;
             }
         }
     }

@@ -6,44 +6,46 @@ public class SchleimEnemy : MonoBehaviour
 {
        private float _speed;
     public GameObject Effect;
-    [SerializeField] public float minSpeed = 20f;
-    [SerializeField] public float maxSpeed = 40f;
-
-    private float maxRotationSpeed = 100f;
-    private Vector3 rotationSpeed;
 
     private Vector2 maxScale;
     private float scale;
 
-    private Vector3 dir;
+    private Rigidbody enemyRigidbody;
+
+    private float chaseSpeed=10;
     // Start is called before the first frame update
     void Start()
     {
-        rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        maxScale.x = 0.8f;
-        maxScale.y = 5f;
-        transform.Rotate(Time.deltaTime*rotationSpeed);
+        maxScale.x = 3f;
+        maxScale.y = 10f;
         scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;
+        enemyRigidbody = GetComponent<Rigidbody>();
         SetSpeedAndPosition();
     }
     
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.Rotate(Time.deltaTime*rotationSpeed);
-        float amtToMove = _speed * Time.deltaTime;
-        transform.Translate(dir*amtToMove,Space.World);
+        transform.LookAt(Player3D.trans);
+        Intercept(Player3D.trans,Player3D.velocity);
+    }
+    private void Chase(Vector3 targetPosition, float speed)
+    {
+        enemyRigidbody.velocity = (targetPosition - transform.position).normalized * speed;
     }
 
+    void Intercept(Vector3 targetPosition,Vector3 targetVelocity)
+    {
+        var relativ = targetVelocity - enemyRigidbody.velocity;
+        var distance = Vector3.Distance(targetPosition,transform.position);
+        var timeToClose = distance / relativ.magnitude;
+        var point = targetPosition + timeToClose * targetVelocity;
+        Chase(point,chaseSpeed);
+    }
     void OnBecameInvisible()
     {
         GetComponent<MeshRenderer>().enabled = true;
-        rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         Debug.Log("Current lives: "+Player.lives);
         SetSpeedAndPosition();
         scale = Random.Range(maxScale.x, maxScale.y);
@@ -52,15 +54,14 @@ public class SchleimEnemy : MonoBehaviour
 
     void SetSpeedAndPosition()
     {
-        _speed = Random.Range(minSpeed, maxSpeed);
         var po =
-            Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.7f), Random.Range(0.3f, 0.7f), 50f));
+            Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), 100f));
         int i = 10;
         var si = GetComponent<CapsuleCollider>().bounds.extents.magnitude/2;
         while ((po.x<-500||po.x>500||po.z>500||po.z<-500)&&i>0&&Physics.CheckSphere(po, si))
         {
             i--;
-            po=Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), 50f));
+            po=Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), 100f));
         }
 
         if (i == 0)
@@ -69,33 +70,18 @@ public class SchleimEnemy : MonoBehaviour
             po.y += 15f;
         }
         transform.position = po;
-        dir = Player3D.trans;
-        dir.x += Random.Range(-20, 20);
-        dir.y += Random.Range(-20, 20);
-        dir.z += Random.Range(-20, 20);
-        dir = (dir - transform.position).normalized;
-        if (Random.Range(0, 2) == 1)
-        {
-            dir = -Player3D.ray.direction;
-        }
-        Debug.Log(transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Collider other = collision.collider;
-        rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        scale = Random.Range(maxScale.x, maxScale.y);
-        transform.localScale = Vector3.one * scale;
-        Instantiate(Effect, transform.position, Quaternion.identity);
-        SetSpeedAndPosition();
-        if (other.CompareTag("Player") || other.CompareTag("PlayersBullet"))
+        if (other.CompareTag("Player")||other.CompareTag("PlayersBullet"))
         {
+            scale = Random.Range(maxScale.x, maxScale.y);
+            transform.localScale = Vector3.one * scale;
+            Instantiate(Effect, transform.position, Quaternion.identity).transform.localScale=transform.localScale/8;
+            SetSpeedAndPosition();
             Player3D.score += 10;
-            Debug.Log("You have score"+Player3D.score);
-            Debug.Log(other.name);
         }
     }
 }

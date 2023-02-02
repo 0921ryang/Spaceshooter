@@ -47,7 +47,7 @@ public class AIenemy : MonoBehaviour
                 }
                 transform.Translate(moveSpeed*new Vector3(playerPosition.position.x-transform.position.x,
                     playerPosition.position.y-transform.position.y+20,
-                    playerPosition.position.z-transform.position.z)*Time.deltaTime); 
+                    playerPosition.position.z-transform.position.z)*Time.fixedDeltaTime); 
                 //es liegt vor Player und folgt immer den Player und beleibt es immer in y-Achse  mit 8 Einheiten zu Player;
                 if (Time.time>nextFire&&GetComponent<MeshRenderer>().enabled)
                 {

@@ -20,26 +20,27 @@ public class Enemy : MonoBehaviour {
     private float scale;
 
     private Vector3 dir;
+
+    private Rigidbody _rigidbody;
     // Start is called before the first frame update
     void Start()
     {
         rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        maxScale.x = 10f;
-        maxScale.y = 30f;
-        transform.Rotate(Time.deltaTime*rotationSpeed);
+        maxScale.x = 30f;
+        maxScale.y = 50f;
+        transform.Rotate(Time.fixedDeltaTime*rotationSpeed);
         scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;
+        _rigidbody = GetComponent<Rigidbody>();
         SetSpeedAndPosition();
     }
     
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.Rotate(Time.deltaTime*rotationSpeed);
-        float amtToMove = _speed * Time.deltaTime;
-        transform.Translate(dir*amtToMove,Space.World);
+        transform.Rotate(Time.fixedDeltaTime*rotationSpeed);
     }
 
     void OnBecameInvisible()
@@ -58,7 +59,7 @@ public class Enemy : MonoBehaviour {
     {
         _speed = Random.Range(minSpeed, maxSpeed);
         var po =
-            Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.7f), Random.Range(0.3f, 0.7f), 100f));
+            Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), 100f));
         int i = 10;
         var si = GetComponent<BoxCollider>().size.magnitude/2;
         while ((po.x<-500||po.x>500||po.z>500||po.z<-500)&&i>0&&Physics.CheckSphere(po, si))
@@ -78,26 +79,27 @@ public class Enemy : MonoBehaviour {
         dir.y += Random.Range(-20, 20);
         dir.z += Random.Range(-20, 20);
         dir = (dir - transform.position).normalized;
-        if (Random.Range(0, 2) == 1)
+        if (Random.Range(0, 7) <= 4)
         {
             dir = -Player3D.ray.direction;
         }
-        Debug.Log(transform.position);
+
+        _rigidbody.velocity = dir * _speed;
         //transform.Translate(Random.Range(-4, 4f), 10, 0);
-        
+
     }
     void OnCollisionEnter(Collision collision)
     {
         Collider other = collision.collider;
-        rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-        scale = Random.Range(maxScale.x, maxScale.y);
-        transform.localScale = Vector3.one * scale;
-        Instantiate(Effect, transform.position, Quaternion.identity);
-        SetSpeedAndPosition();
-        if (other.CompareTag("Player") || other.CompareTag("PlayersBullet"))
+        if (other.CompareTag("Player")||other.CompareTag("PlayersBullet"))
         {
+            rotationSpeed.x = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+            rotationSpeed.y = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+            rotationSpeed.z = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+            scale = Random.Range(maxScale.x, maxScale.y);
+            transform.localScale = Vector3.one * scale;
+            Instantiate(Effect, transform.position, Quaternion.identity).transform.localScale=transform.localScale/16;
+            SetSpeedAndPosition();
             Player3D.score += 10;
             Debug.Log("You have score"+Player3D.score);
             Debug.Log(other.name);

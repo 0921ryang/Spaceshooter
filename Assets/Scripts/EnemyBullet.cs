@@ -16,7 +16,7 @@ public class EnemyBullet : MonoBehaviour
     {
         float amtToMove = speed * Time.deltaTime;
         transform.Translate(Vector3.down*amtToMove,Space.Self);
-        if (main == null||Vector3.Distance(main.transform.position, transform.position) > 150)
+        if (main == null||Vector3.Distance(main.transform.position, transform.position) > 300)
         {
             Destroy(gameObject);
         }

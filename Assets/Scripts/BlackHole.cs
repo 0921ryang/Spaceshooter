@@ -20,35 +20,38 @@ public class BlackHole : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other != null && !other.CompareTag("BlackHole") &&
-            Vector3.Distance(other.transform.position, transform.position) > 50f)
+        if (Player3D.score < 800)
         {
-            if (other.CompareTag("Enemy") || other.CompareTag("Schleim")||other.CompareTag("Explosion"))
+            if (other != null && !other.CompareTag("BlackHole") &&
+                Vector3.Distance(other.transform.position, transform.position) > 50f)
             {
-                other.transform.position =
-                    Vector3.Lerp(other.transform.position, transform.position, 0.05f * Time.deltaTime);
-            }
-            else
-            {
-                Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
-                if (otherRigidbody != null)
+                if (other.CompareTag("Enemy"))
                 {
-                    Vector3 force = (transform.position - other.transform.position).normalized * speed * Time.deltaTime;
-                    otherRigidbody.velocity += force;
+                    other.transform.position =
+                        Vector3.Lerp(other.transform.position, transform.position, 0.1f * Time.deltaTime);
                 }
-            }
+                else
+                {
+                    Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+                    if (otherRigidbody != null)
+                    {
+                        Vector3 force = (transform.position - other.transform.position).normalized * speed * Time.deltaTime;
+                        otherRigidbody.velocity += force;
+                    }
+                }
 
-        }
-        else if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(2);
-        }else if (other.CompareTag("Hindernis"))
-        {
-            Destroy(other.gameObject);
-        }
-        else if (!other.CompareTag("BlackHole"))
-        {
-            other.GetComponent<Renderer>().enabled = false;
+            }
+            else if (other.CompareTag("Player"))
+            {
+                SceneManager.LoadScene(2);
+            }else if (other.CompareTag("Hindernis"))
+            {
+                Destroy(other.gameObject);
+            }
+            else if (!other.CompareTag("BlackHole"))
+            {
+                other.GetComponent<Renderer>().enabled = false;
+            }
         }
     }
 }

@@ -15,6 +15,8 @@ public class MeteoritBOSS : MonoBehaviour
     private Vector3 rotationSpeed;
 
     private Vector2 maxScale;
+
+    private Rigidbody _rigidbody;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,14 +29,14 @@ public class MeteoritBOSS : MonoBehaviour
         float scale = Random.Range(maxScale.x, maxScale.y);
         transform.localScale = Vector3.one * scale;
         _speed = Random.Range(minSpeed, maxSpeed);
+        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.velocity = -Vector3.up * _speed;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Rotate(Time.deltaTime*rotationSpeed);
-        float amtToMove = _speed * Time.deltaTime;
-        transform.Translate(- Vector3.up * amtToMove,Space.World);
     }
 
     private void OnCollisionEnter(Collision collision)
